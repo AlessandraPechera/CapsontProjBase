@@ -1,7 +1,6 @@
 <?php
 
 
- include ("conn.php");
 
  session_start();   
 
@@ -9,10 +8,10 @@
     include "conn.php";
     $ref_id = $_GET['id'];
 
-    $getdata = mysqli_query($conn, "SELECT * FROM 
+    $getdatas= mysqli_query($conn, "SELECT * FROM 
     questions WHERE id='$ref_id'");
 
-    while ($d=mysqli_fetch_object($getdata)){
+    while ($d=mysqli_fetch_object($getdatas)){
 
         $q = $d -> question;
         $q1 = $d -> q_op1;
@@ -332,6 +331,7 @@
                                             <td> <?php echo $row['q_op3'];?></td>
                                             <td> <?php echo $row['q_op4'];?></td>
                                             <td> <?php echo $row['answer'];?></td>
+                                            <td> <?php echo $row['category'];?></td>
                                        
                                             <td> <a href="editquestion.php?id=<?php echo $row['id'];?>"> Edit </a> </td>
                                             <td> <a href="questionDelete.php?id=<?php echo $row['id'];?>"> Delete </a> </td>

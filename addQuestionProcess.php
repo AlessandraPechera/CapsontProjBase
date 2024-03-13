@@ -3,8 +3,6 @@ include "conn.php";
     
   
 
-$exam_category= '';
-
 $getdata= mysqli_query($conn, "SELECT * FROM examcategory WHERE id");
 while($row = mysqli_fetch_array($getdata)) {   
 $exam_category = $row['e_Name'];

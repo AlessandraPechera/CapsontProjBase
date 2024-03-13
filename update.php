@@ -1,5 +1,4 @@
 <?php
- 
     include "conn.php";
     $ref_id = $_GET['id'];
 
@@ -10,70 +9,353 @@
         $id = $d -> id;
         $fn = $d -> fname;
         $ln = $d -> lname;
-        $sect = $d -> section;
+        $sec = $d -> section;
         $eml = $d -> email;
-        $pnn = $d -> phn_n;
+        $phone = $d -> phn_n;
         $ads = $d -> addrss;
-        $ae = $d -> age;
-        $gend = $d -> gender;
-        $doob = $d -> date_b;
+        $agE = $d -> age;
+        $gen = $d -> gender;
+        $dOb = $d -> date_b;
+
     }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Required meta tags-->
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
 
-    <title>Update Profile</title>
+    <!-- Title Page-->
+    <title>Register Students</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="css/font-face.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="css/theme.css" rel="stylesheet" media="all">
+
 </head>
-<body>
-<div class="nav">
-    
-    <a href="form.php"> Add Students </a> &nbsp; | &nbsp;
-    <a href="table.php"> View Records </a> 
 
-</div>
-<h1> Update Profile</h1>
-
-<form action= "process.php?id=<?php echo $ref_id;?>" method ="POST">
-        <label> Student Id</label><br>
-        <input type ="text" name= "update_id" value ="<?php echo $id;?>"   required> </p> 
+<body class="animsition">
+    <div class="page-wrapper">
         
-        <label> First name </label> </br>
-        <input type ="text" name= "update_fname" value="<?php echo $fn;?>"  required> </p>
-        
-        <label> Last name </label> </br>
-        <input type ="text" name= "update_lname" value="<?php echo $ln;?>" required> </p>
+          <!-- MENU SIDEBAR-->
+          <aside class="menu-sidebar d-none d-lg-block">
+             <a class="logo" href="dashboard.php">
+                <h1>Admin</h1>
+              </a>
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li>
+                            <a class="js-arrow" href="dashboard.php">
+                               
+                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                              
+                            </ul>
+                        </li>
+                       
+                        <li>
+                            <a href="table.php">
+                                <i class="fas fa-table"></i>Student List</a>
+                        </li>
+                        <li class="active has-sub">
+                            <a href="form.php">
+                                <i class="far fa-check-square"></i>Student Forms</a>
+                        </li>
+                        <li>
+                            <a href="createExam.php">
+                                <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
+                        </li>
+                        <li>
+                            <a href="questionCreate.php">
+                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                        </li>
+                        
+                       
+                       
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
 
 
-        <label> Section  </label> </br>
-        <input type ="text" name= "update_section"  value="<?php echo $sect;?>" required> </p>
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+                    <a class="logo" href="dashboard.php">
+                          <h1>Admin</h1>
+                        </a>
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                <ul class="navbar-mobile__list list-unstyled">
+                     
+                     <a class="js-arrow" href="dashboard.php">
+                         <i class="fas fa-tachomter-alt"></i>Dashboard </a>
+                 
+                         <li>
+                     <a href="table.php">
+                         <i class="fas fa-table"></i>Student list</a>
+                 </li>
+                 <li>
+                     <a href="form.php">
+                         <i class="far fa-check-square"></i>Student Forms</a>
+                 </li>
+                 <li>
+                     <a href="createExam.php">
+                         <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
+                 </li>
+                 <li>
+                            <a href="questionCreate.php">
+                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                 </li>
+                        
+             </ul>
+        </header>
+        <!-- END HEADER MOBILE-->
 
-        <label> Email </label> </br>
-        <input type ="email" name= "update_email" value="<?php echo $eml; ?>"  required> </p>
+      
 
-        <label> Phone number </label> </br>
-        <input type ="text" name= "update_phn_n" value="<?php echo $pnn; ?>"  required> </p>
-        
-        <label> Address </label> </br>
-        <input type ="text" name= "update_addrss" value="<?php echo $ads; ?>" required> </p>
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                           
+                            <div class="header-button">
+                                <div class="noti-wrap">
+                              
+                                </div>
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="image">
+                                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                        </div>
+                                        <div class="content">
+                                            <a class="js-acc-btn" href="#">Admin </a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="info clearfix">
+                                                <div class="image">
+                                                    <a href="#">
+                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                                    </a>
+                                                </div>
+                                                <div class="content">
+                                                    <h5 class="name">
+                                                        <a href="#">Admin</a>
+                                                    </h5>
+                                                    <span class="email">Admin@mail.com</span>
+                                                </div>
+                                            </div>
+                                         
+                                            <div class="account-dropdown__footer">
+                                                <a href="logout.php">
+                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+                <!-- HEADER DESKTOP-->
 
-        <label> Age </label> </br>
-        <input type ="number" name= "update_age" value="<?php echo $ae; ?>" required> </p>
-        
-        <label> Gender </label> </br>
-        <input type ="text" name= "update_gender" value="<?php echo $gend; ?>" required> </p>
+                <!-- MAIN CONTENT-->
+                <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row justify-content-md-center">
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-header">Student Form</div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="text-center title-2">Update Student's data</h3>
+                                        </div>
+                                        <hr>
+                                        <form action="process2.php" method="post" novalidate="novalidate">
+                                             
+                                            <div class="form-group has-success">
+                                                <label for="stud_id" class="control-label mb-1">Student's ID number</label>
+                                                <input id="stud_id" name="update_id" type="text" class="form-control stud_id valid" 
+                                                value="<?php echo $id;?>" 
+                                                data-val="true" data-val-required="Enter Student's Id number"
+                                                    autocomplete="stud_id" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="stud_id" data-valmsg-replace="true"></span>
+                                            
+                                            </div>
 
-        <label> Date of Birth </label> </br>
-        <input type ="date" name= "update_date_b" value="<?php echo $doob; ?>" required> </p>
 
-        <input type ="submit" name= "update_student" value="UPDATE PROFILE">
+                                            <div class="form-group has-success">
+                                                <label for="fname" class="control-label mb-1">First Name</label>
+                                                <input id="fname" name="update_fname" type="text" class="form-control fname valid" data-val="true" data-val-required="Enter Student's first name"
+                                                value="<?php echo $fn;?>"    
+                                                autocomplete=fname" aria-required="true" aria-invalid="false" aria-describedby="fname-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="fname" data-valmsg-replace="true"></span>
+                                            
+                                            </div>
 
-    </form>
-    
+                                            <div class="form-group has-success">
+                                                <label for="lname" class="control-label mb-1">Last Name</label>
+                                                <input id="lname" name="update_lname" type="text" class="form-control lname valid" data-val="true" data-val-required="Enter Student's last name"
+                                                value="<?php echo $ln;?>"  
+                                                autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="lname-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="lname" data-valmsg-replace="true"></span>
+                                            
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label for="section" class="control-label mb-1">Section</label>
+                                                <input id="section" name="update_section" type="text" class="form-control section valid" data-val="true" data-val-required="Enter Student's Section "
+                                                value="<?php echo $sec;?>"    
+                                                autocomplete="section" aria-required="true" aria-invalid="false" aria-describedby="sectionS-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="section" data-valmsg-replace="true"></span>
+                                            
+                                            </div>
+
+                                            <div class="form-group has-success">
+                                                <label for="email" class="control-label mb-1">Email</label>
+                                                <input id="email" name="update_email" type="email" class="form-control email valid" data-val="true" data-val-required="Enter Student's Email "
+                                                value="<?php echo $eml;?>"  
+                                                autocomplete="email" aria-required="true" aria-invalid="false" aria-describedby="email-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="email" data-valmsg-replace="true"></span>
+                                            
+                                            </div>
+
+                                            <div class="form-group has-success">
+                                                <label for="phn_n" class="control-label mb-1">Phone number</label>
+                                                <input id="phn_n" name="phnupdate_phn_n_n" type="text" class="form-control phn_n valid" data-val="true" data-val-required="Enter Student's Phone number "
+                                                value="<?php echo $phone;?>"  
+                                                autocomplete="phn_n" aria-required="true" aria-invalid="false" aria-describedby="phn_n-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="phn_n" data-valmsg-replace="true"></span>
+                                            
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label for="addrss" class="control-label mb-1">Address</label>
+                                                <input id="addrss" name="update_addrss" type="text" class="form-control addrss valid" data-val="true" data-val-required="Enter Student's Address "
+                                                value="<?php echo $ads;?>"  
+                                                autocomplete="addrss" aria-required="true" aria-invalid="false" aria-describedby="addrss-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="addrss" data-valmsg-replace="true"></span>
+                                            
+                                            </div>
+
+                                            <div class="form-group has-success">
+                                                <label for="age" class="control-label mb-1">Age</label>
+                                                <input id="age" name="update_age" type="text" class="form-control age valid" data-val="true" data-val-required="Enter Student's Age "
+                                                value="<?php echo $agE;?>"     
+                                                autocomplete="age" aria-required="true" aria-invalid="false" aria-describedby="age-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="age" data-valmsg-replace="true"></span>
+                                            
+                                            </div>
+
+                                            <div class="form-group has-success">
+                                                <label for="gender" class="control-label mb-1">Gender</label>
+                                                <input id="gender" name="update_gender" type="text" class="form-control gender valid" data-val="true" data-val-required="Enter Student's Age "
+                                                value="<?php echo $gen;?>"     
+                                                autocomplete="gender" aria-required="true" aria-invalid="false" aria-describedby="gender-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="gender" data-valmsg-replace="true"></span>
+                                            
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label for="date_b" class="control-label mb-1">Date of Birth</label>
+                                                <input id="date_b" name="update_date_b" type="date" class="form-control gender valid" data-val="true" data-val-required="Enter Student's Age "
+                                                value="<?php echo $dOb;?>"     
+                                                autocomplete="date_b" aria-required="true" aria-invalid="false" aria-describedby="date_b-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="date_b" data-valmsg-replace="true"></span>
+                                            
+                                            </div>
+
+
+
+                                                <div>
+                                                 <input id="submit_button" type="submit" name= "update_student" class="btn btn-lg btn-info btn-block" value="Add Student">
+                                                    &nbsp;
+                                                    <span id="sub-button-add">Add student</span>
+                                                 
+                                                </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js">
+    </script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+
 </body>
+
+<footer> 
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-10">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+</footer>
 </html>
+<!-- end document-->
