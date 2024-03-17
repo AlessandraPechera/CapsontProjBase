@@ -1,6 +1,6 @@
 <?php
-include "conn.php";
-
+    include "conn.php";
+    session_start();
 
 
     if(isset($_POST['add_students'])){
@@ -22,28 +22,19 @@ include "conn.php";
 
         
         if($insert == true){
-            
-            ?>
-            <script>
-            alert("SIGN UP SUCESSFUL!");
-            window.location.href ="table.php";
-            </script>
-            <?php   
-        }else{
-            ?>
-            <script>
-            alert("Data is not Inserted! \n Please try again");
-            window.location.href="form.php";
-            </script>
-            <?php
+            header("location: table.php");
         }
-    
+        else{
+            header("location: form.php");
+        }
+
 
     }
-    
-    if(isset($_POST['submitE'])){
+
+    if(isset($_POST['update_student'])){
         $ref_id = $_GET['id'];
-        $i = $_POST['update_id'];
+
+        $x = $_POST['update_id'];
         $a = $_POST['update_fname'];
         $b = $_POST['update_lname'];
         $c = $_POST['update_section'];
@@ -52,30 +43,21 @@ include "conn.php";
         $f = $_POST['update_addrss'];
         $g = $_POST['update_age'];
         $h = $_POST['update_gender'];
-        $j = $_POST['update_date_b'];
+        $i = $_POST['update_date_b'];
 
-        $update_student = mysqli_query($conn, "UPDATE student_info SET id='$i', fname ='$a', lname= '$b', section='$c', 
-        email='$d', phn_n='$e', addrss='$f', age='$g', gender='$h', date_b='$j' WHERE id='$ref_id'");
+        $update_student = mysqli_query($conn, "UPDATE student_info SET id = '$x', fname ='$a', lname= '$b', section='$c', 
+        email='$d', phn_n='$e', addrss='$f', age='$g', gender='$h', date_b='$i' WHERE id='$ref_id'");
         
          if($update_student == true){
-          ?>
-            <script>
-            alert("Data is updated!");
-            window.location.href ="table.php";
-            </script>
-            <?php
+            header("location: table.php");
            
         }
         else{
-             ?>
-            <script>
-            alert("Data is not Inserted! \n Please try again");
-            window.location.href="form.php";
-            </script>
-            <?php
+            header("location: update.php");
         }
+    }
     
-}
+
 
 
 ?>

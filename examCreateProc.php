@@ -1,7 +1,6 @@
 <?php
 include "conn.php";
-
-$ref_id = $_GET['id'];
+session_start();
 
 
 if(isset($_POST['add_Exam'])){
@@ -33,9 +32,10 @@ if(isset($_POST['add_Exam'])){
 
 
 if(isset($_POST['edit_Exam'])){
+    $ref_id = $_GET['id'];
+
 
     $i = $_POST['exam_nameEdit'];
-  
 
     $update_exam = mysqli_query($conn, "UPDATE examcategory SET e_Name  ='$i' WHERE id='$ref_id'");
     

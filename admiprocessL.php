@@ -1,5 +1,5 @@
 <?php
-  include "conn.php";
+  include  "conn.php";
   session_start();
 
   if(isset($_POST['admin_logIn_process'])){
@@ -21,7 +21,6 @@ if($countAdmin == 1){
 
 
     if($databaseAdminPassword == $admin_password){
-
       ?>
       <script>
       alert("Welcome <?php echo $rowData['admin_fName'];?>!");
@@ -50,7 +49,6 @@ if($countAdmin == 1){
 
 
 }
-
 
 
 

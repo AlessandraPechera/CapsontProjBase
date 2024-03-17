@@ -23,19 +23,10 @@ include "conn.php";
         
         if($insert == true){
             
-            ?>
-            <script>
-            alert("SIGN UP SUCESSFUL!");
-            window.location.href ="home .php";
-            </script>
-            <?php   
+           header("location: home.php");
+         
         }else{
-            ?>
-            <script>
-            alert("SIGN UP UNSUCCESSFUL! \n PLEASE TRY AGAIN!");
-            window.location.href="home.php";
-            </script>
-            <?php
+            header("location: home.php");
         }
     
 
@@ -58,22 +49,13 @@ include "conn.php";
         $update_student = mysqli_query($conn, "UPDATE student_info SET id = '$x', fname ='$a', lname= '$b', section='$c', 
         email='$d', phn_n='$e', addrss='$f', age='$g', gender='$h', date_b='$i' WHERE id='$ref_id'");
         
+        
          if($update_student == true){
-          ?>
-            <script>
-            alert("Data is updated!");
-            window.location.href ="table.php";
-            </script>
-            <?php
+            header("location: table.php");
            
         }
         else{
-             ?>
-            <script>
-            alert("Data is not Inserted! \n Please try again");
-            window.location.href="update.php";
-            </script>
-            <?php
+            header("location: update.php");
         }
     
 }

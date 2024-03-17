@@ -12,14 +12,15 @@
     questions WHERE id='$ref_id'");
 
     while ($d=mysqli_fetch_object($getdatas)){
-
+        
         $q = $d -> question;
         $q1 = $d -> q_op1;
         $q2 = $d -> q_op2;
         $q3 = $d -> q_op3;
         $q4 = $d -> q_op4;
         $ans = $d -> answer;
-        $cat = $d -> category;
+        $cate = $d -> category;
+    
        
     }
 
@@ -221,13 +222,12 @@
 
                                         </div>
                                         <hr>
-                                    <form name="form1" action="addQuestionProcess.php
-                                    " method="post" novalidate="novalidate">
+                                    <form  action="addQuestionProcess.php?id=<?php echo $ref_id;?>" method="post" novalidate="novalidate">
 
-                                     
+                                     <input type ="hidden" name="idd" value="<?php echo $ref_id;?>">
                                         
 
-                                        <div class="form-group row">
+                                    <div class="form-group row">
                                             <label for="question" class="col-sm-2 col-form-label">Question</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="editQ" id="editQ" placeholder="<?php echo $q;?>">
@@ -269,16 +269,12 @@
                                                 <input type="text" class="form-control" name="editAns" id="editAns" placeholder="<?php echo $ans;?>">
                                             </div>
                                         </div>      
+                                        <input type ="hidden" name="categ" value="<?php echo $$cate;?>">
 
-                                        <div class="form-group row">
-                                            <label for="eCategoryE" class="col-sm-2 col-form-label"> Category</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="editC" id="editC" placeholder="Category">
-                                            </div>
-                                        </div>          
+                                        
                                         
                                             <div>
-                                            <input id="submit_button" type="submit" name= "submitE" class="btn btn-lg btn-info btn-block" value="ADD">
+                                            <input id="submit_button" type="submit" name= "submitEdit" class="btn btn-lg btn-info btn-block" value="UPDATE">
                                              &nbsp;
                                                     
                                                  
@@ -291,62 +287,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-10">
-                                <div class="card">
-                                    <div class="card-header"></div>
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <h3 class="text-center title-2">Questions</h3>
-                                        </div>
-                                        <hr>
-                                        <table class="table table-success">
-                                            <thead>
-                                                <tr>
-                                                <th scope="col">Category.</th>
-                                                <th scope="col">Question</th>
-                                                <th scope="col">Option 1</th>
-                                                <th scope="col">Option 2</th>
-                                                <th scope="col"> Option 3</th>
-                                                <th scope="col">Option 4</th>
-                                                <th scope="col">Answer</th>
-                                                <th scope="col"> Edit </th>
-                                                <th scope="col">Delete</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            <?php
-                                            
-
-                                           
-                                            $getdata = mysqli_query($conn, "SELECT * FROM questions WHERE id");
-                                            while ($row = mysqli_fetch_array($getdata)) {
-                                                # code...
-                                            
-                                            ?>
-                                            <tr>
-                                            <td> <?php echo $row['category'];?></td>
-                                            <td> <?php echo $row['question'];?></td>
-                                            <td> <?php echo $row['q_op1'];?></td>
-                                            <td> <?php echo $row['q_op2'];?></td>
-                                            <td> <?php echo $row['q_op3'];?></td>
-                                            <td> <?php echo $row['q_op4'];?></td>
-                                            <td> <?php echo $row['answer'];?></td>
-                                            <td> <?php echo $row['category'];?></td>
-                                       
-                                            <td> <a href="editquestion.php?id=<?php echo $row['id'];?>"> Edit </a> </td>
-                                            <td> <a href="questionDelete.php?id=<?php echo $row['id'];?>"> Delete </a> </td>
-                                            </tr>
-
-                                                <?php
-                                                }
-                                                ?>
-                                          
-                                                </tr>   
-                                            </tbody>
-                                            </table>
-                                    </div>
-                                </div>
-                            </div>
+                        
                           
                         </div>          
                    

@@ -1,5 +1,5 @@
 <?php
-  include "conn.php";
+  include 'c:\xampp\htdocs\frag3\conn.php';
   session_start();
 
   if(isset($_POST['student_logIn_process'])){

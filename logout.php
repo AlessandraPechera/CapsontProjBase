@@ -3,10 +3,5 @@
 session_start();
 session_unset();
 session_destroy();
-
+header("location: home.php");
 ?>
-
-<script>
-    alert("Have a great day! Goodbye!");
-    window.location.href="home.php";
-</script>

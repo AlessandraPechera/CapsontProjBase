@@ -2,19 +2,17 @@
 <?php
  
 
- include ("conn.php");
+    include "conn.php";
  
- session_start();
-
- 
+    session_start();
     $ref_id = $_GET['id'];
 
     $getdata = mysqli_query($conn, "SELECT * FROM 
     examcategory WHERE id='$ref_id'");
 
     while ($d=mysqli_fetch_object($getdata)){
-        $id = $d -> id;
-        $e_name = $d -> e_Name;
+        $e = $d -> e_Name;
+        
        
     }
 ?>
@@ -210,19 +208,17 @@
                                             <h3 class="text-center title-2">Create  Exam</h3>
                                         </div>
                                         <hr>
-                                        <form action="examCreateProc.php?id<?php echo $ref_id;?>" method="post" novalidate="novalidate">
+                                        <form action="examCreateProc.php?id=<?php echo $ref_id;?>" method="post" novalidate="novalidate">
                                              
                                              <div class="form-group has-success">
                                                  <label for="exam_name" class="control-label mb-1">Exam Category</label>
-                                                 <input id="exam_nameEdit" name="exam_nameEdit" type="text" value="<?php echo $e_name;?>" class="form-control exam_name valid" data-val="true" data-val-required="Enter Exam Name"
-                                                     autocomplete="exam_name" aria-required="true" aria-invalid="false" aria-describedby="exam_nameEdit-error">
+                                                 <input id="exam_nameEdit" name="exam_nameEdit" type="text" class="form-control exam_name valid" data-val="true" data-val-required="Enter Exam Name"
+                                                 value = "<?php echo $e;?>"
+                                                 autocomplete="exam_name" aria-required="true" aria-invalid="false" aria-describedby="exam_nameEdit-error">
                                                  <span class="help-block field-validation-valid" data-valmsg-for="exam_name" data-valmsg-replace="true"></span>
                                              
                                              </div>
-                                                        <?php 
-                                                        echo "".$_GET['id']."";
-                                                        
-                                                        ?>
+                                                    
                                                 <div>
                                                  <input id="submit_button" type="submit" name= "edit_Exam" class="btn btn-lg btn-info btn-block" value="Save">
                                                     &nbsp;

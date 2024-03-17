@@ -7,21 +7,9 @@
     student_info WHERE id='$ref_id'");
   
     if($delete == true){
-        ?>
-        <script>
-        alert("Data is deleted!");
-        window.location.href ="table.php";
-        </script>
-        <?php
+        header("location: table.php");
     }else{
-        ?>
-        <script>
-        alert("Data is not deleted! \n Please try again");
-        window.location.href="table.php";
-
-        
-        </script>
-        <?php
+        header("location: table.php");
     }
 
 ?>

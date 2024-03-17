@@ -4,6 +4,8 @@
  include ("conn.php");
 
  session_start();   
+ $ref_id =$_GET['id'];
+ 
 ?>                                          
 
 
@@ -41,6 +43,9 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
+    <style>
+   
+    </style>
 
 </head>
 
@@ -272,28 +277,25 @@
                                 </div>
                             </div>
                             <div class="col-lg-10">
-                                <div class="card">
-                                    <div class="card-header"></div>
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <h3 class="text-center title-2">Questions</h3>
-                                        </div>
-                                        <hr>
-                                        <table class="table table-success">
-                                            <thead>
-                                                <tr>
-                                                <th scope="col">Category.</th>
-                                                <th scope="col">Question</th>
-                                                <th scope="col">Option 1</th>
-                                                <th scope="col">Option 2</th>
-                                                <th scope="col"> Option 3</th>
-                                                <th scope="col">Option 4</th>
-                                                <th scope="col">Answer</th>
-                                                <th scope="col"> Edit </th>
-                                                <th scope="col">Delete</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                            <div class="table-responsive m-b-40">
+                                    <table id="myTable" class="table  table-bordered  table-data2">
+                                        <thead class="table-success">
+                                            <tr>
+                                            <th>Category</th>
+                                            <th>Question</th>
+                                            <th>Option 1</th>
+                                            <th class="text-center">Option 2</th>
+                                            <th class="text-center ">Option 3</th>
+                                            <th>Option 4</th>
+                                            <th class="text-center">Answer</th>
+                                            
+                                        
+                                            <th class="text-center">Edit</th>
+                                            <th class="text-center">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
                                             <?php
                                             
 
@@ -311,6 +313,7 @@
                                             <td> <?php echo $row['q_op3'];?></td>
                                             <td> <?php echo $row['q_op4'];?></td>
                                             <td> <?php echo $row['answer'];?></td>
+                                           
                                        
                                             <td> <a href="editquestion.php?id=<?php echo $row['id'];?>"> Edit </a> </td>
                                             <td> <a href="questionDelete.php?id=<?php echo $row['id'];?>"> Delete </a> </td>
@@ -320,12 +323,11 @@
                                                 }
                                                 ?>
                                           
-                                                </tr>   
-                                            </tbody>
-                                            </table>
-                                    </div>
+                                                </tr>  
+                                        </tbody>
+                                    </table>
+                                   
                                 </div>
-                            </div>
                           
                         </div>          
                    

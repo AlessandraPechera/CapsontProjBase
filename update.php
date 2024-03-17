@@ -1,5 +1,7 @@
 <?php
+    session_start();
     include "conn.php";
+
     $ref_id = $_GET['id'];
 
     $getdata = mysqli_query($conn, "SELECT * FROM 
@@ -211,7 +213,7 @@
                                             <h3 class="text-center title-2">Update Student's data</h3>
                                         </div>
                                         <hr>
-                                        <form action="process2.php" method="post" novalidate="novalidate">
+                                        <form action="process2.php?id=<?php echo $ref_id;?>" method="post" novalidate="novalidate">
                                              
                                             <div class="form-group has-success">
                                                 <label for="stud_id" class="control-label mb-1">Student's ID number</label>
@@ -228,7 +230,7 @@
                                                 <label for="fname" class="control-label mb-1">First Name</label>
                                                 <input id="fname" name="update_fname" type="text" class="form-control fname valid" data-val="true" data-val-required="Enter Student's first name"
                                                 value="<?php echo $fn;?>"    
-                                                autocomplete=fname" aria-required="true" aria-invalid="false" aria-describedby="fname-error">
+                                                autocomplete="fname" aria-required="true" aria-invalid="false" aria-describedby="fname-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="fname" data-valmsg-replace="true"></span>
                                             
                                             </div>
@@ -244,7 +246,7 @@
                                             <div class="form-group has-success">
                                                 <label for="section" class="control-label mb-1">Section</label>
                                                 <input id="section" name="update_section" type="text" class="form-control section valid" data-val="true" data-val-required="Enter Student's Section "
-                                                value="<?php echo $sec;?>"    
+                                                value="<?php echo $sec;?>"  
                                                 autocomplete="section" aria-required="true" aria-invalid="false" aria-describedby="sectionS-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="section" data-valmsg-replace="true"></span>
                                             
@@ -261,8 +263,8 @@
 
                                             <div class="form-group has-success">
                                                 <label for="phn_n" class="control-label mb-1">Phone number</label>
-                                                <input id="phn_n" name="phnupdate_phn_n_n" type="text" class="form-control phn_n valid" data-val="true" data-val-required="Enter Student's Phone number "
-                                                value="<?php echo $phone;?>"  
+                                                <input id="phn_n" name="update_phn_n" type="text" class="form-control phn_n valid" data-val="true" data-val-required="Enter Student's Phone number "
+                                                value="<?php echo $phone;?>"      
                                                 autocomplete="phn_n" aria-required="true" aria-invalid="false" aria-describedby="phn_n-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="phn_n" data-valmsg-replace="true"></span>
                                             
@@ -279,7 +281,7 @@
                                             <div class="form-group has-success">
                                                 <label for="age" class="control-label mb-1">Age</label>
                                                 <input id="age" name="update_age" type="text" class="form-control age valid" data-val="true" data-val-required="Enter Student's Age "
-                                                value="<?php echo $agE;?>"     
+                                                value="<?php echo $agE;?>"      
                                                 autocomplete="age" aria-required="true" aria-invalid="false" aria-describedby="age-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="age" data-valmsg-replace="true"></span>
                                             
@@ -288,7 +290,7 @@
                                             <div class="form-group has-success">
                                                 <label for="gender" class="control-label mb-1">Gender</label>
                                                 <input id="gender" name="update_gender" type="text" class="form-control gender valid" data-val="true" data-val-required="Enter Student's Age "
-                                                value="<?php echo $gen;?>"     
+                                                value="<?php echo $gen;?>"  
                                                 autocomplete="gender" aria-required="true" aria-invalid="false" aria-describedby="gender-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="gender" data-valmsg-replace="true"></span>
                                             
@@ -296,7 +298,7 @@
                                             <div class="form-group has-success">
                                                 <label for="date_b" class="control-label mb-1">Date of Birth</label>
                                                 <input id="date_b" name="update_date_b" type="date" class="form-control gender valid" data-val="true" data-val-required="Enter Student's Age "
-                                                value="<?php echo $dOb;?>"     
+                                                value="<?php echo $dOb;?>"    
                                                 autocomplete="date_b" aria-required="true" aria-invalid="false" aria-describedby="date_b-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="date_b" data-valmsg-replace="true"></span>
                                             
@@ -305,9 +307,9 @@
 
 
                                                 <div>
-                                                 <input id="submit_button" type="submit" name= "update_student" class="btn btn-lg btn-info btn-block" value="Add Student">
+                                                 <input id="submit_button" type="submit" name= "update_student" class="btn btn-lg btn-info btn-block" value="Update">
                                                     &nbsp;
-                                                    <span id="sub-button-add">Add student</span>
+                                                    <span id="sub-button-add">Update data</span>
                                                  
                                                 </div>
                                         </form>
