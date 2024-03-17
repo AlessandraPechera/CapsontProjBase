@@ -94,7 +94,12 @@
                  <li>
                             <a href="createQuestions.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
-                        </li>
+                 </li>
+                 <li>
+                            <a href="logout.php">
+                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                 </li>
+                        
                         
                 
               
@@ -136,6 +141,10 @@
                             <a href="createQuestions.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
+                          <li>
+                            <a href="logout.php">
+                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                        </li>
                         
                        
                        
@@ -147,52 +156,7 @@
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="header-wrap">
-                           
-                            <div class="header-button">
-                                <div class="noti-wrap">
-                              
-                                </div>
-                                <div class="account-wrap ">
-                                    <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
-                                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                        </div>
-                                        <div class="content">
-                                            <a class="js-acc-btn" href="#">Admin </a>
-                                        </div>
-                                        <div class="account-dropdown js-dropdown">
-                                            <div class="info clearfix">
-                                                <div class="image">
-                                                    <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                                    </a>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#">Admin</a>
-                                                    </h5>
-                                                    <span class="email">Admin@mail.com</span>
-                                                </div>
-                                            </div>
-                                         
-                                            <div class="account-dropdown__footer">
-                                                <a href="logout.php">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-                <!-- HEADER DESKTOP-->
+   
 
                 <!-- MAIN CONTENT-->
                 <div class="main-content">

@@ -81,6 +81,11 @@
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
                         
+                        <li>
+                            <a href="logout.php">
+                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                        </li>
+                        
                        
                     </ul>
                 </nav>
@@ -90,12 +95,14 @@
         
         <!-- END MENU SIDEBAR-->
 
-         <!-- HEADER MOBILE-->
-         <header class="header-mobile d-block d-lg-none">
+      
+
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                    <a class="logo" href="dashboard.php">
+                        <a class="logo" href="dashboard.php">
                           <h1>Admin</h1>
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -108,87 +115,49 @@
             </div>
             <nav class="navbar-mobile">
                 <div class="container-fluid">
-                <ul class="navbar-mobile__list list-unstyled">
+                    <ul class="navbar-mobile__list list-unstyled">
                      
-                     <a class="js-arrow" href="dashboard.php">
-                     <i class="fas fa-tachomter-alt"></i>Dashboard </a>
-                 
-                 <li>
-                     <a href="table.php">
-                     <i class="fas fa-table"></i>Student list</a>
-                </li>
-                 <li>
-                     <a href="form.php">
-                     <i class="far fa-check-square"></i>Student Forms</a>
-                 </li>
-                 <li>
-                     <a href="createExam.php">
-                     <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
-                 </li>
-                 
-                 <li>
-                     <a href="createQuestions.php">
-                    <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                            <a class="js-arrow" href="dashboard.php">
+                                <i class="fas fa-tachomter-alt"></i>Dashboard </a>
                         
-
-                </li>
-            </ul>
+                                <li>
+                            <a href="table.php">
+                                <i class="fas fa-table"></i>Student list</a>
+                        </li>
+                        <li>
+                            <a href="form.php">
+                                <i class="far fa-check-square"></i>Student Forms</a>
+                        </li>
+                        <li>
+                            <a href="createExam.php">
+                                <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
+                        </li>
+                        <li>
+                            <a href="createQuestions.php">
+                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                        </li>
+                        <li>
+                            <a href="logout.php">
+                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </header>
+        <!-- END HEADER MOBILE-->
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="header-wrap">
-                          
-                            <div class="header-button">
-                                <div class="noti-wrap">
-                                    
-                                <div class="account-wrap">
-                                    <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
-                                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                        </div>
-                                        <div class="content">
-                                            <a class="js-acc-btn" href="#">Admin</a>
-                                        </div>
-                                        <div class="account-dropdown js-dropdown">
-                                            <div class="info clearfix">
-                                                <div class="image">
-                                                    <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                                    </a>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#">Admin</a>
-                                                    </h5>
-                                                    <span class="email">Admin@example.com</span>
-                                                </div>
-                                            </div>
-                                           
-                                            <div class="account-dropdown__footer">
-                                                <a href="logout.php">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-            <!-- END HEADER DESKTOP-->
+       
+            
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
-                <div class="section__content section__content--p30">
+                <div class="section__content section__content--10">
                     <div class="container-fluid">
                    
-                        <div class="row justify-content-center m-t-10">
+                        <div class="row justify-content-center m-t-">
+                            
                             <h1 class="m-b-35">Students</h1>
                             <div class="col-md-12">
                                 <!-- DATA TABLE-->

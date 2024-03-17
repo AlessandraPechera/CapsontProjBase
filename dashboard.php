@@ -12,11 +12,7 @@ session_start();
 
 <head>
     <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="au theme template">
-    <meta name="author" content="Hau Nguyen">
-    <meta name="keywords" content="au theme template">
+   
 
     <!-- Title Page-->
     <title>Dashboard</title>
@@ -82,7 +78,10 @@ session_start();
                             <a href="createQuestions.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
-                        
+                        <li>
+                            <a href="logout.php">
+                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                        </li>
                       
                         
                     </ul>
@@ -97,7 +96,7 @@ session_start();
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="dashboard.html">
+                        <a class="logo" href="dashboard.php">
                           <h1>Admin</h1>
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -131,6 +130,10 @@ session_start();
                             <a href="createQuestions.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
+                        <li>
+                            <a href="logout.php">
+                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                        </li>
                         
                     </ul>
                 </div>
@@ -149,54 +152,7 @@ session_start();
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
-            <!-- HEADER DESKTOP-->
-            <header class="header-desktop">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="header-wrap">
-                           
-                            <div class="header-button">
-                                <div class="noti-wrap">
-                              
-                                </div>
-                                <div class="account-wrap">
-                                    <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
-                                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                        </div>
-                                        <div class="content">
-                                            <a class="js-acc-btn" href="#">Admin</a>
-                                        </div>
-                                        <div class="account-dropdown js-dropdown">
-                                            <div class="info clearfix">
-                                                <div class="image">
-                                                    <a href="#">
-                                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
-                                                    </a>
-                                                </div>
-                                                <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#">Admin</a>
-                                                    </h5>
-                                                    <span class="email">Admin@example.com</span>
-                                                </div>
-                                            </div>
-                                           
-                                            <div class="account-dropdown__footer">
-                                                <a href="logout.php">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        
-            <!-- HEADER DESKTOP-->
-            <br></br>
+         
             <br></br>
             
 
