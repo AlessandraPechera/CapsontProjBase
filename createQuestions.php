@@ -2,6 +2,7 @@
  include ("conn.php");
 
  session_start();
+  
 ?>
 
 
@@ -213,6 +214,7 @@
                                                 <?php
                                                 $getdata = mysqli_query($conn, "SELECT * FROM examcategory");
                                                 while ($row = mysqli_fetch_array($getdata)) {
+                                    
                                                 # code...
                                             
                                                 ?>

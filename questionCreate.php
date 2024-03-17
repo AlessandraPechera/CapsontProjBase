@@ -4,7 +4,11 @@
  include ("conn.php");
 
  session_start();   
- $ref_id =$_GET['id'];
+
+
+
+
+
  
 ?>                                          
 
@@ -88,7 +92,7 @@
                  </li>
                 
                  <li>
-                            <a href="questionCreate.php">
+                            <a href="createQuestions.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
                         
@@ -129,7 +133,7 @@
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
                         </li>
                         <li class="active has-sub">
-                            <a href="questionCreate.php">
+                            <a href="createQuestions.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
                         
@@ -199,15 +203,26 @@
                           
                             <div class="col-lg-10">
                                 <div class="card">
+
                                     <div class="card-header"></div>
+                                    
                                     <div class="card-body">
                                         <div class="card-title">
-                                            <h3 class="text-center title-2">Add Question</h3>
+                                            <?php
+                                            $ref_id =$_GET['id'];
+                                             $getdata= mysqli_query($conn, "SELECT e_Name FROM examcategory WHERE id = '$ref_id'");
+                                             while($row = mysqli_fetch_array($getdata)) {   
+                                                ?>
+                                                <h3 class="text-center title-2">Add to Exam Category <?php echo $row['e_Name'];?></h3>
+                                            <?php
+                                            }
+                                            ?>
+                                          
+                                        
 
                                         </div>
                                         <hr>
-                                    <form name="form1" action="addQuestionProcess.php
-                                    " method="post" novalidate="novalidate">
+                                    <form name="form1" action="addQuestionProcess.php?=id<?php echo $ref_id;?> " method="post" novalidate="novalidate">
 
                                      
                                         
@@ -255,12 +270,7 @@
                                             </div>
                                         </div>      
 
-                                        <div class="form-group row">
-                                            <label for="eCategory" class="col-sm-2 col-form-label"> Category</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="inputCategory" id="inputCategory" placeholder="Category">
-                                            </div>
-                                        </div>          
+                                             
                                         
                                             <div>
                                             <input id="submit_button" type="submit" name= "submitl" class="btn btn-lg btn-info btn-block" value="ADD">
@@ -298,12 +308,12 @@
                                             <tr>
                                             <?php
                                             
-
+                                                
                                            
-                                            $getdata = mysqli_query($conn, "SELECT * FROM questions WHERE id");
-                                            while ($row = mysqli_fetch_array($getdata)) {
-                                                # code...
-                                            
+                                            $getdataz = mysqli_query($conn, "SELECT * FROM questions WHERE id ");
+                                            while ($row = mysqli_fetch_array($getdataz)) {
+                                                # ciode...
+                                           
                                             ?>
                                             <tr>
                                             <td> <?php echo $row['category'];?></td>

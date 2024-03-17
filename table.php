@@ -77,7 +77,7 @@
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
                         </li>
                         <li>
-                            <a href="questionCreate.php">
+                            <a href="createQuestions.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
                         
@@ -111,24 +111,24 @@
                 <ul class="navbar-mobile__list list-unstyled">
                      
                      <a class="js-arrow" href="dashboard.php">
-                         <i class="fas fa-tachomter-alt"></i>Dashboard </a>
+                     <i class="fas fa-tachomter-alt"></i>Dashboard </a>
                  
-                    <li>
-                         <a href="table.php">
-                         <i class="fas fa-table"></i>Student list</a>
-                    </li>
+                 <li>
+                     <a href="table.php">
+                     <i class="fas fa-table"></i>Student list</a>
+                </li>
                  <li>
                      <a href="form.php">
-                         <i class="far fa-check-square"></i>Student Forms</a>
+                     <i class="far fa-check-square"></i>Student Forms</a>
                  </li>
                  <li>
                      <a href="createExam.php">
-                         <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
+                     <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
                  </li>
                  
                  <li>
-                            <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                     <a href="createQuestions.php">
+                    <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         
 
                 </li>

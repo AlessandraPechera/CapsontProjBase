@@ -79,7 +79,7 @@ session_start();
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
                         </li>
                         <li>
-                            <a href="questionCreate.php">
+                            <a href="createQuestions.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
                         
@@ -128,7 +128,7 @@ session_start();
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
                         </li>
                         <li>
-                            <a href="questionCreate.php">
+                            <a href="createQuestions.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
                         

@@ -1,12 +1,12 @@
 <?php
 include "conn.php";
     session_start();
-  
+  $ref_id = $_GET['id'];
 
-$getdata= mysqli_query($conn, "SELECT * FROM examcategory WHERE id");
+$getdata= mysqli_query($conn, "SELECT e_Name FROM examcategory WHERE id = '$ref_id'");
 while($row = mysqli_fetch_array($getdata)) {   
 $exam_category = $row['e_Name'];
-}       
+       
 ?>
 <?php
 if(isset($_POST['submitl'])){
@@ -17,12 +17,12 @@ if(isset($_POST['submitl'])){
     $inp_Op3 = $_POST['inputOption3'];
     $inp_Op4 = $_POST['inputOption4'];
     $inp_Ans = $_POST['inputAnswer'];
-    $cate = $_POST['inputCategory'];
+   
     
     
 
     $insert = mysqli_query($conn,"INSERT INTO questions VALUES
-    ('0','$inp_Q','$inp_Op1', '$inp_Op2', '$inp_Op3','$inp_Op4', '$inp_Ans','$cate')");
+    ('0','$inp_Q','$inp_Op1', '$inp_Op2', '$inp_Op3','$inp_Op4', '$inp_Ans','$exam_category')");
 
     
     if($insert == true){
@@ -41,7 +41,10 @@ if(isset($_POST['submitl'])){
         </script>
         <?php
     }
+
 }
+}
+
   if(isset($_POST['submitEdit'])){
         $ref_id = $_GET['id'];
 
@@ -64,11 +67,10 @@ if(isset($_POST['submitl'])){
            
         }
         else{
-            echo "no";
+  
             header("location: editquestion.php");
         }
     }
   
-   
 
 ?>
