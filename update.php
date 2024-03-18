@@ -87,10 +87,7 @@
                             <a href="form.php">
                                 <i class="far fa-check-square"></i>Student Forms</a>
                         </li>
-                        <li>
-                            <a href="createExam.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
-                        </li>
+                    
                         <li>
                             <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
@@ -140,10 +137,7 @@
                      <a href="form.php">
                          <i class="far fa-check-square"></i>Student Forms</a>
                  </li>
-                 <li>
-                     <a href="createExam.php">
-                         <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
-                 </li>
+              
                  <li>
                             <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>

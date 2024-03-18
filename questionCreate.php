@@ -86,13 +86,10 @@
                      <a href="form.php">
                          <i class="far fa-check-square"></i>Student Forms</a>
                  </li>
-                 <li>
-                     <a href="createExam.php">
-                         <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
-                 </li>
+               
                 
                  <li>
-                            <a href="createQuestions.php">
+                            <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                  </li>
                  <li>
@@ -133,12 +130,9 @@
                             <a href="form.php">
                                 <i class="far fa-check-square"></i>Student Forms</a>
                         </li>
-                        <li>
-                            <a href="createExam.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
-                        </li>
+                       
                         <li class="active has-sub">
-                            <a href="createQuestions.php">
+                            <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
                           <li>
@@ -162,34 +156,39 @@
                 <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center">    
                           
                           
                             <div class="col-lg-10">
                                 <div class="card">
 
-                                    <div class="card-header"></div>
+                                 <div class="card-header"></div>
                                     
                                     <div class="card-body">
                                         <div class="card-title">
-                                            <?php
-                                            $ref_id =$_GET['id'];
-                                             $getdata= mysqli_query($conn, "SELECT e_Name FROM examcategory WHERE id = '$ref_id'");
-                                             while($row = mysqli_fetch_array($getdata)) {   
-                                                ?>
-                                                <h3 class="text-center title-2">Add to Exam Category <?php echo $row['e_Name'];?></h3>
-                                            <?php
-                                            }
-                                            ?>
                                           
+                                          
+                                             <h3 class="text-center title-2">Create Question</h3>
                                         
 
                                         </div>
                                         <hr>
-                                    <form name="form1" action="addQuestionProcess.php?=id<?php echo $ref_id;?> " method="post" novalidate="novalidate">
-
-                                     
+                                    <form name="form1" action="addQuestionProcess.php" method="post" novalidate="novalidate">
+                                       
+                                    <div class="form-group row">
+                                      <label for="Category" class="col-sm-2 col-form-label">Categroy</label>
+                                        <div class="col-sm-10">
+                                        <select name="inputCategory" class="form-control">
                                         
+                                        <option name="JAVA">JAVA </option>
+                                        <option name="HTML" >HTML</option>
+                                        <option name="Python" >Python</option>
+                                        <option name="C++" >C++</option>
+                                         </select>
+                                        </div>
+                                      </div>   
+
+
 
                                         <div class="form-group row">
                                             <label for="question" class="col-sm-2 col-form-label">Question</label>
@@ -272,9 +271,9 @@
                                             <tr>
                                             <?php
                                             
-                                                
+                              
                                            
-                                            $getdataz = mysqli_query($conn, "SELECT * FROM questions WHERE id ");
+                                            $getdataz = mysqli_query($conn, "SELECT * FROM questions WHERE id");
                                             while ($row = mysqli_fetch_array($getdataz)) {
                                                 # ciode...
                                            
@@ -312,6 +311,14 @@
                     </div>
                 </div>
             </div>
+            <div class="row justify-content-md-center">
+                            <div class="col-md-10">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+          </div>
+
         </div>
 
     </div>
@@ -341,15 +348,7 @@
     <script src="js/main.js"></script>
 
 </body>
-<footer> 
-                        <div class="row justify-content-md-center">
-                            <div class="col-md-10">
-                                <div class="copyright">
-                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
-                                </div>
-                            </div>
-                        </div>
-</footer>
+
 </html>
 <!-- end document-->
                                             

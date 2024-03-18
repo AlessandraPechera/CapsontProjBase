@@ -72,12 +72,9 @@
                             <a href="form.php">
                                 <i class="far fa-check-square"></i>Student Forms</a>
                         </li>
+                     
                         <li>
-                            <a href="createExam.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
-                        </li>
-                        <li>
-                            <a href="createQuestions.php">
+                            <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
                         
@@ -128,12 +125,9 @@
                             <a href="form.php">
                                 <i class="far fa-check-square"></i>Student Forms</a>
                         </li>
+               
                         <li>
-                            <a href="createExam.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
-                        </li>
-                        <li>
-                            <a href="createQuestions.php">
+                            <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
                         <li>
@@ -156,15 +150,15 @@
                 <div class="section__content section__content--10">
                     <div class="container-fluid">
                    
-                        <div class="row justify-content-center m-t-">
+                        <div class="row justify-content-center m-t-0">
                             
-                            <h1 class="m-b-35">Students</h1>
+                            <h1 class="m-b-5">Students</h1>
                             <div class="col-md-12">
                                 <!-- DATA TABLE-->
                                 <input type="text" id="mySearch" onkeyup="searchFunction()" placeholder="Search for names.." title="Type in a name">
 
 
-                                <div class="table-responsive m-b-40">
+                                <div class="table-responsive m-b-10">
                                     <table id="myTable" class="table  table-bordered  table-data2">
                                         <thead class="table-success">
                                             <tr>

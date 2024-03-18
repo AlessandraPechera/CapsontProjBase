@@ -232,7 +232,15 @@ session_start();
 
                     </div>
                 </div>
-            </div>
+           
+             </div>
+             <div class="row row justify-content-md-center">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+             </div>
         </div>
 
     </div>
@@ -262,15 +270,7 @@ session_start();
     <script src="js/main.js"></script>
 
 </body>
-<footer> 
-                        <div class="row justify-content-md-center">
-                            <div class="col-md-10">
-                                <div class="copyright">
-                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
-                                </div>
-                            </div>
-                        </div>
-</footer>
+
 </html>
 <!-- end document-->
 

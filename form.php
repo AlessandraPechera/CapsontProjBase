@@ -70,12 +70,9 @@ session_start();
                             <a href="form.php">
                                 <i class="far fa-check-square"></i>Student Forms</a>
                         </li>
+                    
                         <li>
-                            <a href="createExam.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
-                        </li>
-                        <li>
-                            <a href="createQuestions.php">
+                            <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
                         <li>
@@ -122,12 +119,9 @@ session_start();
                      <a href="form.php">
                          <i class="far fa-check-square"></i>Student Forms</a>
                  </li>
+               
                  <li>
-                     <a href="createExam.php">
-                         <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
-                 </li>
-                 <li>
-                            <a href="questiocreateQuestionsnCreate.php">
+                            <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                  </li>
                  <li>
@@ -250,7 +244,14 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                       
+                            <div class="row row justify-content-md-center">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -284,14 +285,6 @@ session_start();
 
 </body>
 
-<footer> 
-                        <div class="row justify-content-md-center">
-                            <div class="col-md-10">
-                                <div class="copyright">
-                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
-                                </div>
-                            </div>
-                        </div>
-</footer>
+
 </html>
 <!-- end document-->
