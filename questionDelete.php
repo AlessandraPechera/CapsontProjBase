@@ -7,19 +7,9 @@
     questions WHERE id ='$ref_id'");
   
     if($delete == true){
-        ?>  
-        <script>
-        alert("Data is deleted!");
-        window.location.href ="questionCreate.php";
-        </script>
-        <?php
+        header("location: questionCreate.php");
     }else{
-        ?>
-        <script>
-        alert("Data is not deleted! \n Please try again");
-        window.location.href="questionCreate.php";
-        </script>
-        <?php
+        header("location: questionCreate.php");
     }
 
 ?>

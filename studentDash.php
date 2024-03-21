@@ -1,12 +1,18 @@
 <?php
 include ("conn.php");
 
+
 session_start();
-if(!isset($_SESSION['admin_id'])){
+
+if(!isset($_SESSION['student_id'])){
     header("Location: home.php");
     exit();
 }
 ?>
+
+
+
+
 
 
 
@@ -51,56 +57,34 @@ if(!isset($_SESSION['admin_id'])){
 
          <!-- MENU SIDEBAR-->
          <aside class="menu-sidebar d-none d-lg-block">
-             <a class="logo" href="dashboard.php">
-                <h1>Admin</h1>
+             <a class="logo" href="studentDash.php">
+                <h1>Student</h1>
               </a>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li class="active has-sub">
-                            <a class="js-arrow" href="dashboard.php">
+                        <li  class="active has-sub">
+                            <a class="js-arrow" href="studentDash.php?id=<?php echo $_SESSION['student_id'];?>">
                                
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                            <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                               
                             </ul>
                         </li>
+                
+                        <li>
+                     
+                         
+                            <a href="takeExam.php?id=<?php echo $_SESSION['student_id'];?>">
+                                <i class="far fa-check-square"></i>Exams </a>
+                                
+                        
+                             </li>
+                       
                        
                         <li>
-                            <a href="table.php">
-                                <i class="fas fa-table"></i>Student list</a>
-                        </li>
-                        <li>
-                            <a href="form.php">
-                                <i class="far fa-check-square"></i>Student Forms</a>
-                        </li>
-                        
-                   
-                        <li>
-                            <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Exams</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="exam1.php">JAVA</a>
-                                </li>
-                                <li>
-                                    <a href="#">C++</a>
-                                </li>
-                                <li>
-                                    <a href="#">Python</a>
-                                </li>
-                                <li>
-                                    <a href="#">HTML</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                         </li>
                       
                         
@@ -116,8 +100,8 @@ if(!isset($_SESSION['admin_id'])){
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="dashboard.php">
-                          <h1>Admin</h1>
+                        <a class="logo" href="studentDash.php">
+                          <h1>Student</h1>
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -131,43 +115,20 @@ if(!isset($_SESSION['admin_id'])){
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                      
-                            <a class="js-arrow" href="dashboard.php">
+                            <a class="js-arrow" href="studentDash.php">
                                 <i class="fas fa-tachomter-alt"></i>Dashboard </a>
                         
                                 <li>
-                            <a href="table.php">
-                                <i class="fas fa-table"></i>Student list</a>
-                        </li>
+                            
                         <li>
-                            <a href="form.php">
-                                <i class="far fa-check-square"></i>Student Forms</a>
+                            <a href="takeExam.php">
+                                <i class="far fa-check-square"></i>Exams</a>
                         </li>
                         
-                        <li>
-                            <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-copy"></i>Exams</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="exam1.php">JAVA</a>
-                                </li>
-                                <li>
-                                    <a href="exam2.php">C++</a>
-                                </li>
-                                <li>
-                                    <a href="exam3.php">Python</a>
-                                </li>
-                                <li>
-                                    <a href="exam4.php">HTML</a>
-                                </li>
-                            </ul>
-                        </li>
+                       
                         <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                         </li>
                         
                     </ul>
@@ -187,36 +148,56 @@ if(!isset($_SESSION['admin_id'])){
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
-         
-            <br></br>
+        <?php
+     $sql = "SELECT * FROM `questions` WHERE category ='JAVA'  ORDER BY RAND() LIMIT 10";
+     $result = $conn->query($sql);
+     
+     if ($result->num_rows > 0) {
+         $questions = [];
+         while ($row = $result->fetch_assoc()) {
+             $questions[] = $row;
+         }
+     
+         // Display the questions in an examination format
+         echo "<form action='submitExam.php' method='POST'>";
+         foreach ($questions as $index => $question) {
+             echo "<h3>Question " . ($index + 1) . ":</h3>";
+             echo "<input type='hidden' name='question_id[]' value='" . $question['id'] . "'>";
+             echo "<p>" . $question['question'] . "</p>";
+             echo "<ul>";
+             echo "<li><input type='radio' name='answer[" . $question['id'] . "]' value='1'> " . $question['q_op1'] . "</li>";
+             echo "<li><input type='radio' name='answer[" . $question['id'] . "]' value='2'> " . $question['q_op2'] . "</li>";
+             echo "<li><input type='radio' name='answer[" . $question['id'] . "]' value='3'> " . $question['q_op3'] . "</li>";
+             echo "<li><input type='radio' name='answer[" . $question['id'] . "]' value='4'> " . $question['q_op4'] . "</li>";
+             echo "</ul>";
+         }
+         echo "<input type='submit' value='Submit'>";
+         echo "</form>";
+     } else {
+         echo "No questions found.";
+     }
+?>
+
+</div>
+<!-- MAIN CONTENT-->
+<div class="main-content">
+<div class="section__content section__content--p30">
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
+       
             
 
-            <div class="col-lg-6">
-                                <div class="au-card m-b-30">
-                                    <div class="au-card-inner">
-                                        <h3 class="title-2 m-b-10">Student Exam takers percentage per month</h3>
-                                        <canvas id="barChart"></canvas>
-                                    </div>
-                                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="au-card m-b-30">
-                    <div class="au-card-inner">
-                        <h3 class="title-2 m-b-40">Student examinees per day percentage</h3>
-                        <canvas id="singelBarChart"></canvas>
-                    </div>
+    </div>
+</div>
+</div>
+<div class="row row justify-content-md-center">
+            <div class="col-md-12">
+                <div class="copyright">
+                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
                 </div>
-                
             </div>
-            <div class="row row justify-content-md-center">
-                            <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
-                                </div>
-                            </div>
-                </div>
-            
-        </div>
+            </div>
+</div>
       
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->

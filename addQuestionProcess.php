@@ -20,20 +20,9 @@ if(isset($_POST['submitl'])){
 
     
     if($insert == true){
-        
-        ?>
-        <script>
-        alert("Question Added");
-        window.location.href ="questionCreate.php?=id<?php $ref_id;?>";
-        </script>
-        <?php   
+        header("location: questionCreate.php");
     }else{
-        ?>
-        <script>
-        alert("Question creation error! \n Please try again?=id<?php $ref_id;?>");
-        window.location.href="questionCreate.php";
-        </script>
-        <?php
+        header("location: questionCreate.php");
     }
 
 }
@@ -53,7 +42,7 @@ if(isset($_POST['submitl'])){
         
        
         $update_questions = mysqli_query($conn, "UPDATE questions SET question='$q', q_op1 ='$q1', q_op2= '$q2', q_op3='$q3', 
-        q_op4 ='$q4', answer='$ans' WHERE id='$ref_id'");
+        q_op4 ='$q4', correct_option='$ans' WHERE id='$ref_id'");
         
          if($update_questions == true){
             

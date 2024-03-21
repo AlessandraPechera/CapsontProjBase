@@ -2,6 +2,11 @@
    include ("conn.php");
 
    session_start();
+   if(!isset($_SESSION['admin_id'])){
+    header("Location: home.php");
+    exit();
+}
+
 
 ?>
 
@@ -77,6 +82,24 @@
                             <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="exam1.php">JAVA</a>
+                                </li>
+                                <li>
+                                    <a href="exam2.php">C++</a>
+                                </li>
+                                <li>
+                                    <a href="exam3.php">Python</a>
+                                </li>
+                                <li>
+                                    <a href="exam4.php">HTML</a>
+                                </li>
+                            </ul>
+                        </li>
                         
                         <li>
                             <a href="logout.php">
@@ -130,6 +153,24 @@
                             <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="exam1.php">JAVA</a>
+                                </li>
+                                <li>
+                                    <a href="exam2.php">C++</a>
+                                </li>
+                                <li>
+                                    <a href="exam3.php">Python</a>
+                                </li>
+                                <li>
+                                    <a href="exam4.php">HTML</a>
+                                </li>
+                            </ul>
+                        </li>
                         <li>
                             <a href="logout.php">
                                 <i class="fas fa-calendar-alt"></i>Log out</a>
@@ -155,8 +196,7 @@
                             <h1 class="m-b-5">Students</h1>
                             <div class="col-md-12">
                                 <!-- DATA TABLE-->
-                                <input type="text" id="mySearch" onkeyup="searchFunction()" placeholder="Search for names.." title="Type in a name">
-
+                               
 
                                 <div class="table-responsive m-b-10">
                                     <table id="myTable" class="table  table-bordered  table-data2">

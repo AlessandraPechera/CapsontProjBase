@@ -4,7 +4,10 @@
  include ("conn.php");
 
  session_start();   
-
+ if(!isset($_SESSION['admin_id'])){
+    header("Location: home.php");
+    exit();
+}
 
 
 
@@ -47,9 +50,6 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-    <style>
-   
-    </style>
 
 </head>
 
@@ -92,6 +92,24 @@
                             <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                  </li>
+                 <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="exam1.php">JaVA</a>
+                                </li>
+                                <li>
+                                    <a href="exam2.php">C++</a>
+                                </li>
+                                <li>
+                                    <a href="exam3.php">Python</a>
+                                </li>
+                                <li>
+                                    <a href="exam4.php">HTML</a>
+                                </li>
+                            </ul>
+                        </li>
                  <li>
                             <a href="logout.php">
                                 <i class="fas fa-calendar-alt"></i>Log out</a>
@@ -135,6 +153,24 @@
                             <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="exam1.php">JaVA</a>
+                                </li>
+                                <li>
+                                    <a href="exam2.php">C++</a>
+                                </li>
+                                <li>
+                                    <a href="exam3.php">Python</a>
+                                </li>
+                                <li>
+                                    <a href="exam4.php">HTML</a>
+                                </li>
+                            </ul>
+                        </li>
                           <li>
                             <a href="logout.php">
                                 <i class="fas fa-calendar-alt"></i>Log out</a>
@@ -157,7 +193,8 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="row justify-content-center">    
-                          
+                            
+                                    
                           
                             <div class="col-lg-10">
                                 <div class="card">
@@ -185,8 +222,8 @@
                                         <option name="Python" >Python</option>
                                         <option name="C++" >C++</option>
                                          </select>
-                                        </div>
-                                      </div>   
+                                            </div>
+                                        </div>   
 
 
 
@@ -249,62 +286,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-10">
-                            <div class="table-responsive m-b-40">
-                                    <table id="myTable" class="table  table-bordered  table-data2">
-                                        <thead class="table-success">
-                                            <tr>
-                                            <th>Category</th>
-                                            <th>Question</th>
-                                            <th>Option 1</th>
-                                            <th class="text-center">Option 2</th>
-                                            <th class="text-center ">Option 3</th>
-                                            <th>Option 4</th>
-                                            <th class="text-center">Answer</th>
-                                            
-                                        
-                                            <th class="text-center">Edit</th>
-                                            <th class="text-center">Delete</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                            <?php
-                                            
-                              
-                                           
-                                            $getdataz = mysqli_query($conn, "SELECT * FROM questions WHERE id");
-                                            while ($row = mysqli_fetch_array($getdataz)) {
-                                                # ciode...
-                                           
-                                            ?>
-                                            <tr>
-                                            <td> <?php echo $row['category'];?></td>
-                                            <td> <?php echo $row['question'];?></td>
-                                            <td> <?php echo $row['q_op1'];?></td>
-                                            <td> <?php echo $row['q_op2'];?></td>
-                                            <td> <?php echo $row['q_op3'];?></td>
-                                            <td> <?php echo $row['q_op4'];?></td>
-                                            <td> <?php echo $row['answer'];?></td>
-                                           
-                                       
-                                            <td> <a href="editquestion.php?id=<?php echo $row['id'];?>"> Edit </a> </td>
-                                            <td> <a href="questionDelete.php?id=<?php echo $row['id'];?>"> Delete </a> </td>
-                                            </tr>
-
-                                                <?php
-                                                }
-                                                ?>
-                                          
-                                                </tr>  
-                                        </tbody>
-                                    </table>
-                                   
-                                </div>
-                          
-                        </div>          
-                   
                             
+                          
                        
 
 
@@ -312,6 +295,9 @@
                 </div>
             </div>
             <div class="row justify-content-md-center">
+
+
+
                             <div class="col-md-10">
                                 <div class="copyright">
                                     <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>

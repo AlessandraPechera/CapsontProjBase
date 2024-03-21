@@ -408,7 +408,7 @@
       </div>
 
       <div class="modal-body">
-        <form action="admiprocessL.php" method="POST">
+        <form action="adminLogin.php" method="POST">
 
           <div class="input-group mb-3">
             <div class="input-group-text">
@@ -472,7 +472,7 @@ function AdminLogInShowPassword() {
         </div>
   
         <div class="modal-body">
-          <form action="studLog.php" method="POST">
+          <form action="studLog2.php" method="POST">
   
             <div class="input-group mb-3">
               <div class="input-group-text">

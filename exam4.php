@@ -1,34 +1,18 @@
 <?php
 
 
+ include ("conn.php");
 
- 
  session_start();   
  if(!isset($_SESSION['admin_id'])){
     header("Location: home.php");
     exit();
 }
+
+
+
+
  
-    include "conn.php";
-    $ref_id = $_GET['id'];
-
-    $getdatas= mysqli_query($conn, "SELECT * FROM 
-    questions WHERE id='$ref_id'");
-
-    while ($d=mysqli_fetch_object($getdatas)){
-        
-        $q = $d -> question;
-        $q1 = $d -> q_op1;
-        $q2 = $d -> q_op2;
-        $q3 = $d -> q_op3;
-        $q4 = $d -> q_op4;
-        $ans = $d -> correct_option;
-        $cate = $d -> category;
-    
-       
-    }
-
-
 ?>                                          
 
 
@@ -44,7 +28,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Add or Edit Questions</title>
+    <title>HTML</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -102,16 +86,34 @@
                      <a href="form.php">
                          <i class="far fa-check-square"></i>Student Forms</a>
                  </li>
-                
+               
                 
                  <li>
                             <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                  </li>
+                 <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="exam1.php">JAVA</a>
+                                </li>
+                                <li>
+                                    <a href="exam2.php">C++</a>
+                                </li>
+                                <li>
+                                    <a href="exam3.php">Python</a>
+                                </li>
+                                <li class="active has-sub">
+                                    <a href="exam4.php">HTML</a>
+                                </li>
+                            </ul>
+                        </li>
                  <li>
                             <a href="logout.php">
                                 <i class="fas fa-calendar-alt"></i>Log out</a>
-                        </li>
+                 </li>
                         
                         
                 
@@ -146,12 +148,30 @@
                             <a href="form.php">
                                 <i class="far fa-check-square"></i>Student Forms</a>
                         </li>
-                      
-                        <li class="active has-sub">
+                       
+                        <li>
                             <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
-                        <li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="exam1.php">JAVA</a>
+                                </li>
+                                <li>
+                                    <a href="exam2.php">C++</a>
+                                </li>
+                                <li>
+                                    <a href="exam3.php">Python</a>
+                                </li>
+                                <li class="active has-sub">
+                                    <a href="exam4.php">HTML</a>
+                                </li>
+                            </ul>
+                        </li>
+                          <li>
                             <a href="logout.php">
                                 <i class="fas fa-calendar-alt"></i>Log out</a>
                         </li>
@@ -166,100 +186,89 @@
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
-        
+   
 
                 <!-- MAIN CONTENT-->
                 <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="row justify-content-center">
-                          
-                          
-                            <div class="col-lg-10">
-                                <div class="card">
-                                    <div class="card-header"></div>
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <h3 class="text-center title-2">Edit Question</h3>
-
-                                        </div>
-                                        <hr>
-                                    <form  action="addQuestionProcess.php?id=<?php echo $ref_id;?>" method="post" novalidate="novalidate">
-
-                                     <input type ="hidden" name="idd" value="<?php echo $ref_id;?>">
-                                        
-
-                                    <div class="form-group row">
-                                            <label for="question" class="col-sm-2 col-form-label">Question</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="editQ" id="editQ" value="<?php echo $q;?>">
-                                            </div>
-                                        </div>     
-                                        
-                                        <div class="form-group row">
-                                            <label for="opt1" class="col-sm-2 col-form-label">Add Option 1</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="editQ1" id="editQ1" value="<?php echo $q1;?>">
-                                            </div>
-                                        </div>     
-                                        
-                                        
-                                        <div class="form-group row">
-                                            <label for="opt2" class="col-sm-2 col-form-label">Add Option 2</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="editQ2" id="editQ2" value="<?php echo $q2;?>">
-                                            </div>
-                                        </div>           
-
-                                        <div class="form-group row">
-                                            <label for="opt3" class="col-sm-2 col-form-label">Add Option 3</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="editQ3" id="editQ3" value="<?php echo $q3;?>">
-                                            </div>
-                                        </div>           
-                                        
-                                        <div class="form-group row">
-                                            <label for="opt4" class="col-sm-2 col-form-label">Add Option 4</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="editQ4" id="editQ4" value="<?php echo $q4;?>">
-                                            </div>
-                                        </div>               
-                                        
-                                        <div class="form-group row">
-                                            <label for="qAnswerE" class="col-sm-2 col-form-label">Add Answer</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" name="editAns" id="editAns" value="<?php echo $ans;?>">
-                                            </div>
-                                        </div>      
-                                        <input type ="hidden" name="categ" value="<?php echo $cate;?>">
-
-                                        
-                                        
-                                            <div>
-                                            <input id="submit_button" type="submit" name= "submitEdit" class="btn btn-lg btn-info btn-block" value="UPDATE">
-                                             &nbsp;
-                                                    
-                                                 
-                                             </div>
-
-
-                                        
-                                    </form>
-                                     
-                                    </div>
-                                </div>
-                            </div>
-                        
-                          
-                        </div>          
-                   
+                        <div class="row justify-content-center">    
                             
+                                    
+                          
                        
+                            
+                            <div class="col-lg-10">
+                                <div class="table-responsive m-b-40">
+                           
+                                    <h1>HTML questions</h1>
+                                    <table id="myTable" class="table  table-bordered  table-data2">
+                                        <thead class="table-success">
+                                            
+                                            <tr>
+                                            <th>Category</th>
+                                            <th>Question</th>
+                                            <th>Option 1</th>
+                                            <th class="text-center">Option 2</th>
+                                            <th class="text-center ">Option 3</th>
+                                            <th>Option 4</th>
+                                            <th class="text-center">Answer</th>
+                                            
+                                        
+                                            <th class="text-center">Edit</th>
+                                            <th class="text-center">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                            <?php
+                                            
+                              
+                                           
+                                            $getdataz = mysqli_query($conn, "SELECT * FROM questions WHERE category ='HTML'");
+                                            while ($row = mysqli_fetch_array($getdataz)) {
+                                                # ciode...
+                                           
+                                            ?>
+                                            <tr>
+                                            <td> <?php echo $row['category'];?></td>
+                                            <td> <?php echo $row['question'];?></td>
+                                            <td> <?php echo $row['q_op1'];?></td>
+                                            <td> <?php echo $row['q_op2'];?></td>
+                                            <td> <?php echo $row['q_op3'];?></td>
+                                            <td> <?php echo $row['q_op4'];?></td>
+                                            <td> <?php echo $row['correct_option'];?></td>
+                                           
+                                       
+                                            <td> <a href="editquestion.php?id=<?php echo $row['id'];?>"> Edit </a> </td>
+                                            <td> <a href="questionDelete.php?id=<?php echo $row['id'];?>"> Delete </a> </td>
+                                            </tr>
 
-
+                                                <?php
+                                                }
+                                                ?>
+                                          
+                                                </tr>  
+                                        </tbody>
+                                    </table>
+                                   
+                                </div>
+                            </div>   
+                    
                     </div>
                 </div>
             </div>
+            <div class="row justify-content-md-center">
+
+
+
+                            <div class="col-md-10">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+          </div>
+
         </div>
 
     </div>
@@ -289,15 +298,7 @@
     <script src="js/main.js"></script>
 
 </body>
-<footer> 
-                        <div class="row justify-content-md-center">
-                            <div class="col-md-10">
-                                <div class="copyright">
-                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
-                                </div>
-                            </div>
-                        </div>
-</footer>
+
 </html>
 <!-- end document-->
                                             

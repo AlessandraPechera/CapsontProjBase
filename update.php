@@ -1,6 +1,10 @@
 <?php
     session_start();
     include "conn.php";
+    if(!isset($_SESSION['admin_id'])){
+        header("Location: home.php");
+        exit();
+    }
 
     $ref_id = $_GET['id'];
 
@@ -92,6 +96,24 @@
                             <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="exam1.php">JAVA</a>
+                                </li>
+                                <li>
+                                    <a href="exam2.php">C++</a>
+                                </li>
+                                <li>
+                                    <a href="exam3.php">Python</a>
+                                </li>
+                                <li>
+                                    <a href="exam4.php">HTML</a>
+                                </li>
+                            </ul>
+                        </li>
                         <li>
                             <a href="logout.php">
                                 <i class="fas fa-calendar-alt"></i>Log out</a>
@@ -142,6 +164,24 @@
                             <a href="questionCreate.php">
                                 <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                  </li>
+                 <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="exam1.php">JAVA</a>
+                                </li>
+                                <li>
+                                    <a href="exam2.php">C++</a>
+                                </li>
+                                <li>
+                                    <a href="exam3.php">Python</a>
+                                </li>
+                                <li>
+                                    <a href="exam4.php">HTML</a>
+                                </li>
+                            </ul>
+                        </li>
                  <li>
                             <a href="logout.php">
                                 <i class="fas fa-calendar-alt"></i>Log out</a>
@@ -175,7 +215,7 @@
                                             <div class="form-group has-success">
                                                 <label for="stud_id" class="control-label mb-1">Student's ID number</label>
                                                 <input id="stud_id" name="update_id" type="text" class="form-control stud_id valid" 
-                                                value="<?php echo $id;?>" 
+                                                value="<?php echo $id;?>"
                                                 data-val="true" data-val-required="Enter Student's Id number"
                                                     autocomplete="stud_id" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="stud_id" data-valmsg-replace="true"></span>
