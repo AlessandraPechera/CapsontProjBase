@@ -6,7 +6,7 @@ session_start();
 if(isset($_POST['add_Exam'])){
     $examName = $_POST['exam_name'];
    
-    $insert = mysqli_query($conn,"INSERT INTO examcategory  VALUES
+    $insert = mysqli_query($conn,"INSERT INTO examcatgory  VALUES
     ('0','$examName')");
 
     

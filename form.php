@@ -1,7 +1,12 @@
 <?php
 include ("conn.php");
 
+
 session_start();
+if(!isset($_SESSION['admin_id'])){
+    header("Location: home.php");
+    exit();
+}
 
 ?>
 
@@ -48,6 +53,7 @@ session_start();
           <!-- MENU SIDEBAR-->
           <aside class="menu-sidebar d-none d-lg-block">
              <a class="logo" href="dashboard.php">
+             <img src="images/uiLogo3.jpeg"  style="height:65%;">
                 <h1>Admin</h1>
               </a>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -73,11 +79,29 @@ session_start();
                     
                         <li>
                             <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                                <i class="fas fa-calendar-alt"></i>Add Questions</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <?php
+                                            $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
+                                            while ($row = mysqli_fetch_array($getdata)) {
+                                                # code...
+                                            
+                                            ?>  
+                                <li>
+                                    <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
+                                </li><?php
+                             }
+                             ?>
+                               
+                            </ul>
                         </li>
                         <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                         </li>
                        
                        
@@ -107,11 +131,15 @@ session_start();
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
-                     
-                     <a class="js-arrow" href="dashboard.php">
-                         <i class="fas fa-tachomter-alt"></i>Dashboard </a>
-                 
-                         <li>
+                 <li >   
+                        <a class="js-arrow" href="dashboard.php">
+                               
+                               <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                           <ul class="list-unstyled navbar__sub-list js-sub-list">
+                             
+                           </ul>
+                 </li>
+                 <li>
                      <a href="table.php">
                          <i class="fas fa-table"></i>Student list</a>
                  </li>
@@ -122,11 +150,29 @@ session_start();
                
                  <li>
                             <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                                <i class="fas fa-calendar-alt"></i>Add Questions</a>
                  </li>
+                 <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <?php
+                                            $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
+                                            while ($row = mysqli_fetch_array($getdata)) {
+                                                # code...
+                                            
+                                            ?>  
+                                <li>
+                                    <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
+                                </li><?php
+                             }
+                             ?>
+                               
+                            </ul>
+                        </li>
                  <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                  </li>
                         
              </ul>
@@ -209,13 +255,7 @@ session_start();
                                             
                                             </div>
 
-                                            <div class="form-group has-success">
-                                                <label for="age" class="control-label mb-1">Age</label>
-                                                <input id="age" name="age" type="text" class="form-control age valid" data-val="true" data-val-required="Enter Student's Age "
-                                                    autocomplete="age" aria-required="true" aria-invalid="false" aria-describedby="age-error">
-                                                <span class="help-block field-validation-valid" data-valmsg-for="age" data-valmsg-replace="true"></span>
                                             
-                                            </div>
 
                                             <div class="form-group has-success">
                                                 <label for="gender" class="control-label mb-1">Gender</label>
@@ -244,17 +284,18 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                            <div class="row row justify-content-md-center">
-                            <div class="col-md-12">
-                                <div class="copyright">
-                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
-                                </div>
-                            </div>
+
                         </div>
 
                     </div>
                 </div>
             </div>
+            <div class="row row justify-content-md-center">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
         </div>
 
     </div>

@@ -4,7 +4,10 @@
  include ("conn.php");
 
  session_start();   
-
+ if(!isset($_SESSION['admin_id'])){
+    header("Location: home.php");
+    exit();
+}
 
 
 
@@ -25,7 +28,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Add or Edit Questions</title>
+    <title>Add Questions</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -47,9 +50,6 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-    <style>
-   
-    </style>
 
 </head>
 
@@ -61,6 +61,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                     <a class="logo" href="dashboard.php">
+                        
                           <h1>Admin</h1>
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -74,11 +75,15 @@
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
-                     
-                     <a class="js-arrow" href="dashboard.php">
-                         <i class="fas fa-tachomter-alt"></i>Dashboard </a>
-                 
-                         <li>
+                 <li >   
+                        <a class="js-arrow" href="dashboard.php">
+                               
+                               <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                           <ul class="list-unstyled navbar__sub-list js-sub-list">
+                             
+                           </ul>
+                 </li>
+                 <li>
                      <a href="table.php">
                          <i class="fas fa-table"></i>Student list</a>
                  </li>
@@ -90,11 +95,32 @@
                 
                  <li>
                             <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                                <i class="fas fa-calendar-alt"></i>Add Questions</a>
                  </li>
+                 <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <?php
+                                            $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
+                                            while ($row = mysqli_fetch_array($getdata)) {
+                                                # code...
+                                            
+                                            ?>  
+                                <li>
+                                    <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
+                                </li><?php
+                             }
+                             ?>
+                             <li>
+                                <a href="createExam.php"> Create Exam</a>
+                             <li> 
+                               
+                            </ul>
+                        </li>
                  <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                  </li>
                         
                         
@@ -108,6 +134,7 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
              <a class="logo" href="dashboard.php">
+             <img src="images/uiLogo3.jpeg"  style="height:65%;">
                 <h1>Admin</h1>
               </a>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -133,11 +160,32 @@
                        
                         <li class="active has-sub">
                             <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                                <i class="fas fa-calendar-alt"></i>Add Questions</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <?php
+                                            $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
+                                            while ($row = mysqli_fetch_array($getdata)) {
+                                                # code...
+                                            
+                                            ?>  
+                                <li>
+                                    <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
+                                </li><?php
+                             }
+                             ?>
+                             <li>
+                                <a href="createExam.php"> Create Exam</a>
+                             <li> 
+                               
+                            </ul>
                         </li>
                           <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                         </li>
                         
                        
@@ -157,7 +205,8 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="row justify-content-center">    
-                          
+                            
+                                    
                           
                             <div class="col-lg-10">
                                 <div class="card">
@@ -179,14 +228,20 @@
                                       <label for="Category" class="col-sm-2 col-form-label">Categroy</label>
                                         <div class="col-sm-10">
                                         <select name="inputCategory" class="form-control">
-                                        
-                                        <option name="JAVA">JAVA </option>
-                                        <option name="HTML" >HTML</option>
-                                        <option name="Python" >Python</option>
-                                        <option name="C++" >C++</option>
+                                        <?php
+                                            $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
+                                            while ($row = mysqli_fetch_array($getdata)) {
+                                                # code...
+                                            
+                                            ?>  
+                                        <option name="<?php echo $row['examName'];?>"><?php echo $row['examName'];?> </option>
+                                        <?php
+                                        }
+                                        ?>
+                                      
                                          </select>
-                                        </div>
-                                      </div>   
+                                            </div>
+                                        </div>   
 
 
 
@@ -245,73 +300,43 @@
 
                                         
                                     </form>
+                                    
                                      
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-10">
-                            <div class="table-responsive m-b-40">
-                                    <table id="myTable" class="table  table-bordered  table-data2">
-                                        <thead class="table-success">
-                                            <tr>
-                                            <th>Category</th>
-                                            <th>Question</th>
-                                            <th>Option 1</th>
-                                            <th class="text-center">Option 2</th>
-                                            <th class="text-center ">Option 3</th>
-                                            <th>Option 4</th>
-                                            <th class="text-center">Answer</th>
-                                            
-                                        
-                                            <th class="text-center">Edit</th>
-                                            <th class="text-center">Delete</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                            <?php
-                                            
-                              
-                                           
-                                            $getdataz = mysqli_query($conn, "SELECT * FROM questions WHERE id");
-                                            while ($row = mysqli_fetch_array($getdataz)) {
-                                                # ciode...
-                                           
-                                            ?>
-                                            <tr>
-                                            <td> <?php echo $row['category'];?></td>
-                                            <td> <?php echo $row['question'];?></td>
-                                            <td> <?php echo $row['q_op1'];?></td>
-                                            <td> <?php echo $row['q_op2'];?></td>
-                                            <td> <?php echo $row['q_op3'];?></td>
-                                            <td> <?php echo $row['q_op4'];?></td>
-                                            <td> <?php echo $row['answer'];?></td>
-                                           
-                                       
-                                            <td> <a href="editquestion.php?id=<?php echo $row['id'];?>"> Edit </a> </td>
-                                            <td> <a href="questionDelete.php?id=<?php echo $row['id'];?>"> Delete </a> </td>
-                                            </tr>
 
-                                                <?php
-                                                }
-                                                ?>
-                                          
-                                                </tr>  
-                                        </tbody>
-                                    </table>
-                                   
+                                    
                                 </div>
-                          
-                        </div>          
-                   
+
+
+                                <div class="form-group row">
+                                <label for="csvFile" class="col-sm-2 col-form-label">Upload CSV File</label>
+                                    <div class="col-sm-10">
+                                        <p>Instruction<br>
+                                        CSV file format must be: Question, Option1, Option2, Option3, Option4, Answer, Category</p><br>
+                                        <form name="form1" action="importCSV.php" method="post" enctype="multipart/form-data">
+
+                                          <input type="file" class="form-control-file" id="csvFile" name="csvFile">
+                                          <input id="submit_button" type="submit" name= "submit" class="btn btn-lg btn-info btn-block" value="Upload">
+                                        </form>
+                                    </div>
+                                </div>
+                                
+                            </div>
                             
+                          
                        
 
 
                     </div>
+                    
                 </div>
+               
+
             </div>
             <div class="row justify-content-md-center">
+
+
+
                             <div class="col-md-10">
                                 <div class="copyright">
                                     <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>

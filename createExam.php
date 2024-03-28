@@ -2,6 +2,10 @@
 include ("conn.php");
 
 session_start();
+if(!isset($_SESSION['admin_id'])){
+    header("Location: home.php");
+    exit();
+}
 ?>
 
 
@@ -64,11 +68,15 @@ session_start();
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
-                     
-                     <a class="js-arrow" href="dashboard.php">
-                         <i class="fas fa-tachomter-alt"></i>Dashboard </a>
-                 
-                         <li>
+                 <li >   
+                        <a class="js-arrow" href="dashboard.php">
+                               
+                               <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                           <ul class="list-unstyled navbar__sub-list js-sub-list">
+                             
+                           </ul>
+                 </li>
+                 <li>
                      <a href="table.php">
                          <i class="fas fa-table"></i>Student list</a>
                  </li>
@@ -76,23 +84,41 @@ session_start();
                      <a href="form.php">
                          <i class="far fa-check-square"></i>Student Forms</a>
                  </li>
+                 
                  <li>
-                     <a href="createExam.php">
-                         <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
+                     <a href="questionCreate.php">
+                         <i class="fas fa-calendar-alt"></i>Add Questions</a>
                  </li>
-                
-                 <li>
-                            <a href="createQuestions.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
-                        </li>
-                        <li>
-                            <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
-                        </li>
+                 <li class="has-sub">
+                     <a class="js-arrow" href="#">
+                   
+                     <i class="fas fa-copy"></i>Exams</a>
+                     <ul class="list-unstyled navbar__sub-list js-sub-list">
+                     <?php
+                                     $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
+                                     while ($row = mysqli_fetch_array($getdata)) {
+                                         # code...
+                                     
+                                     ?>  
+                         <li>
+                             <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
+                         </li>
+                         <?php
+                      }
+                      ?>
+                      <li>
+                         <a href="createExam.php"> Create Exam</a>
+                         <li>
                         
-                
-              
-               
+                     </ul>
+                   
+                 </li>
+                 
+                 <li>
+                     <a href="logout.php">
+                         <i class="fas fa-user-circle"></i>Log out</a>
+                 </li>
+                 
              </ul>
         </header>
         <!-- END HEADER MOBILE-->
@@ -104,7 +130,7 @@ session_start();
               </a>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
-                    <ul class="list-unstyled navbar__list">
+                <ul class="list-unstyled navbar__list">
                         <li>
                             <a class="js-arrow" href="dashboard.php">
                                
@@ -116,27 +142,46 @@ session_start();
                        
                         <li>
                             <a href="table.php">
-                                <i class="fas fa-table"></i>Student List</a>
+                                <i class="fas fa-table"></i>Student list</a>
                         </li>
                         <li>
                             <a href="form.php">
                                 <i class="far fa-check-square"></i>Student Forms</a>
                         </li>
-                        <li class="active has-sub">
-                            <a href="createExam.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Exam</a>
-                        </li>
+                        
+                   
                         <li>
-                            <a href="createQuestions.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                            <a href="questionCreate.php">
+                                <i class="fas fa-calendar-alt"></i>Add Questions</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <?php
+                                                $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
+                                                while ($row = mysqli_fetch_array($getdata)) {
+                                                    # code...
+                                                
+                                                ?>  
+                                    <li>
+                                        <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                              <li>
+                                <a href="createExam.php"> Create Exam</a>
+                                <li>
+                               
+                            </ul>
                         </li>
                         <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                         </li>
+                      
                         
-                       
-                       
                     </ul>
                 </nav>
             </div>
@@ -201,14 +246,14 @@ session_start();
                                             <tbody>
                                                 <tr>
                                                 <?php
-                                                $getdata = mysqli_query($conn, "SELECT * FROM examcategory");
+                                                $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
                                                 while ($row = mysqli_fetch_array($getdata)) {
                                                 # code...
                                             
                                                 ?>
                                                 <tr>
                                                 <td><?php echo $row['id'];?></td>
-                                                <td> <?php echo $row['e_Name'];?></td>
+                                                <td> <?php echo $row['examName'];?></td>
                                                 <td> <a href="editExam.php?id=<?php echo $row['id'];?>"> Edit </a> </td>
                                             <td> <a href="deleteExam.php?id=<?php echo $row['id'];?>"> Delete </a> </td>
                                                 </tr>

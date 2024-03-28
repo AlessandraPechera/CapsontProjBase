@@ -2,6 +2,10 @@
 include ("conn.php");
 
 session_start();
+if(!isset($_SESSION['admin_id'])){
+    header("Location: home.php");
+    exit();
+}
 ?>
 
 
@@ -47,7 +51,9 @@ session_start();
 
          <!-- MENU SIDEBAR-->
          <aside class="menu-sidebar d-none d-lg-block">
+        
              <a class="logo" href="dashboard.php">
+             <img src="images/uiLogo3.jpeg"  style="height:65%;">
                 <h1>Admin</h1>
               </a>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -70,14 +76,37 @@ session_start();
                             <a href="form.php">
                                 <i class="far fa-check-square"></i>Student Forms</a>
                         </li>
+                        
                    
                         <li>
                             <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                                <i class="fas fa-calendar-alt"></i>Add Questions</a>
+                        </li>
+                        <li>
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <?php
+                                                $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
+                                                while ($row = mysqli_fetch_array($getdata)) {
+                                                    # code...
+                                                
+                                                ?>  
+                                    <li>
+                                        <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                              <li>
+                                <a href="createExam.php"> Create Exam</a>
+                                <li>
+                               
+                            </ul>
                         </li>
                         <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                         </li>
                       
                         
@@ -94,7 +123,7 @@ session_start();
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="dashboard.php">
-                          <h1>Admin</h1>
+                          <h1> Admin</h1>
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -107,11 +136,15 @@ session_start();
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                     
-                            <a class="js-arrow" href="dashboard.php">
-                                <i class="fas fa-tachomter-alt"></i>Dashboard </a>
-                        
-                                <li>
+                        <li >   
+                        <a class="js-arrow" href="dashboard.php">
+                               
+                               <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                           <ul class="list-unstyled navbar__sub-list js-sub-list">
+                             
+                           </ul>
+                        </li>
+                        <li>
                             <a href="table.php">
                                 <i class="fas fa-table"></i>Student list</a>
                         </li>
@@ -122,11 +155,36 @@ session_start();
                         
                         <li>
                             <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                                <i class="fas fa-calendar-alt"></i>Add Questions</a>
                         </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                          
+                            <i class="fas fa-copy"></i>Exams</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <?php
+                                            $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
+                                            while ($row = mysqli_fetch_array($getdata)) {
+                                                # code...
+                                            
+                                            ?>  
+                                <li>
+                                    <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
+                                </li>
+                                <?php
+                             }
+                             ?>
+                             <li>
+                                <a href="createExam.php"> Create Exam</a>
+                                <li>
+                               
+                            </ul>
+                          
+                        </li>
+                        
                         <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                         </li>
                         
                     </ul>
@@ -147,35 +205,118 @@ session_start();
         <!-- PAGE CONTAINER-->
         <div class="page-container">
          
-            <br></br>
-            
+       
+              <div class="main-content">
+                <div class="section__content section__content--10">
+                    <div class="container-fluid">
+                   
+                        <div class="row justify-content-center m-t-0">
+                            
+                            <h1 class="m-b-5">Students</h1>
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+                               
 
-            <div class="col-lg-6">
-                                <div class="au-card m-b-30">
-                                    <div class="au-card-inner">
-                                        <h3 class="title-2 m-b-10">Student Exam takers percentage per month</h3>
-                                        <canvas id="barChart"></canvas>
-                                    </div>
+                                <form method="post" action="">
+                                    <input type="text" name="search" placeholder="Search...">
+                                    <input type="submit" name="submit" value="Search">
+                                </form>
+                                
+                                <div class="table-responsive m-b-10">
+                                <table id="myTable" class="table table-bordered table-data2">
+                                    <thead class="table-success">
+                                        <tr>
+                                            <th>Student ID</th>
+                                            <th>First name</th>
+                                            <th>Last name</th>
+                                            <th class="text-center">Section</th>
+                                            <th class="text-center">Category</th>
+                                            <th class="text-center">Scores</th>
+                                            <th class="text-center">date</th>
+                                            
+                                          
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+
+                                        //search
+                                        if(isset($_POST['submit'])){
+                                            $search = $_POST['search'];
+                                            $sql ="SELECT student_info.id, student_info.fname, student_info.lname, student_info.section, student_scores.score, student_scores.eCategory, student_scores.timestamp
+                                            FROM student_info
+                                            LEFT JOIN student_scores ON student_info.id = student_scores.student_id WHERE id LIKE '%$search%' OR fname LIKE '%$search%' OR lname LIKE '%$search%' OR email LIKE '%$search%'";
+
+                                           
+                                            $result = $conn->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                                while($row = $result->fetch_assoc()) {
+                                                    echo "<tr>
+                                                            <td>" . $row["id"] . "</td>
+                                                            <td>" . $row["fname"] . "</td>
+                                                            <td>" . $row["lname"] . "</td>
+                                                            <td class='text-center'>" . $row["section"] . "</td>
+                                                            <td class='text-center'>" . $row["eCategory"] . "</td>
+                                                            <td>" . $row["score"] . "</td>
+                                                            <td class='text-center'>" . $row["timestamp"] . "</td>
+                                                           
+                                                        </tr>";
+                                                }
+                                            } else {
+                                                echo "<tr><td colspan='12'>No results found</td></tr>";
+                                            }
+                                        } else {
+                                            // default display
+                                           $getdata = mysqli_query($conn, "SELECT student_info.id, student_info.fname, student_info.lname, student_info.section, student_scores.score, student_scores.eCategory, student_scores.timestamp
+                                FROM student_info
+                                LEFT JOIN student_scores ON student_info.id = student_scores.student_id");
+
+                                    while ($row = mysqli_fetch_array($getdata)) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $row['id'];?></td>
+                                            <td><?php echo $row['fname'];?></td>
+                                            <td><?php echo $row['lname'];?></td>
+                                            <td class="text-center"><?php echo $row['section'];?></td>
+                                            <td class="text-center"><?php echo $row['eCategory'];?></td>
+                                            <td class="text-center"><?php echo $row['score'];?></td>
+                                            <td class="text-center"><?php echo $row['timestamp'];?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    ?>
+                                    <?php
+
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                                                                
                                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="au-card m-b-30">
-                    <div class="au-card-inner">
-                        <h3 class="title-2 m-b-40">Student examinees per day percentage</h3>
-                        <canvas id="singelBarChart"></canvas>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="row row justify-content-md-center">
+                                <!-- END DATA TABLE-->
+                            </div>
+                        </div>
+                        <div class="row row justify-content-md-center">
                             <div class="col-md-12">
                                 <div class="copyright">
                                     <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row justify-content-md-center">
+                <div class="col-md-12">
+                        <div class="copyright">
+                                        <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                        </div>         
+                            
                 </div>
             
-        </div>
+            </div>
       
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
@@ -208,6 +349,7 @@ session_start();
     <script src="js/main.js"></script>
 
 </body>
+
 
 
 </html>

@@ -328,7 +328,22 @@
             <input type="email" class="form-control" 
             name="email" required placeholder="Enter Email">
           </div>
-          
+           
+          <div class="input-group mb-3">
+            <div class="input-group-text">
+
+              <i class="bi bi-envelope-at"></i>
+
+            
+            </div>
+            <input type="password" class="form-control" 
+            name="password" required placeholder="Enter Password"
+            name="AdminPasswordLogIn" required placeholder="Enter Password" id="adminInputLogIn" 
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+            title="Must contain at least one number and one uppercase and lowercase letter, 
+            and at least 8 or more characters">
+            
+          </div>
           <div class="input-group mb-3">
             <div class="input-group-text">
 
@@ -351,17 +366,7 @@
             name="addrss" required placeholder="Enter Your Address">
           </div>
           
-          <div class="input-group mb-3">
-            <div class="input-group-text">
-
-              <i class="bi bi-envelope-at"></i>
-
-            
-            </div>
-            <input type="number" class="form-control" 
-            name="age" required placeholder="Enter Your Age">
-          </div>
-          
+       
 
           <div class="input-group mb-3">
             <div class="input-group-text">
@@ -408,7 +413,7 @@
       </div>
 
       <div class="modal-body">
-        <form action="admiprocessL.php" method="POST">
+        <form action="adminLogin.php" method="POST">
 
           <div class="input-group mb-3">
             <div class="input-group-text">
@@ -472,7 +477,7 @@ function AdminLogInShowPassword() {
         </div>
   
         <div class="modal-body">
-          <form action="studLog.php" method="POST">
+          <form action="studLog2.php" method="POST">
   
             <div class="input-group mb-3">
               <div class="input-group-text">
@@ -493,7 +498,7 @@ function AdminLogInShowPassword() {
                
               </div>
               <input type="password" class="form-control" 
-              name="StudentPasswordLogIn" required placeholder="Enter ID number as password" id="studentInputLogIn">
+              name="StudentPasswordLogIn" required placeholder="Enter password" id="studentInputLogIn">
               <br>
             </div>
             <input type="checkbox" onclick="StudentLogInShowPassword()">Show Password

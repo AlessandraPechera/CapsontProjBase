@@ -2,6 +2,11 @@
    include ("conn.php");
 
    session_start();
+   if(!isset($_SESSION['admin_id'])){
+    header("Location: home.php");
+    exit();
+}
+
 
 ?>
 
@@ -50,6 +55,7 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
              <a class="logo" href="dashboard.php">
+             <img src="images/uiLogo3.jpeg"  style="height:65%;">
                 <h1>Admin</h1>
               </a>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -75,12 +81,33 @@
                      
                         <li>
                             <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                                <i class="fas fa-calendar-alt"></i>Add Questions</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <?php
+                                            $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
+                                            while ($row = mysqli_fetch_array($getdata)) {
+                                                # code...
+                                            
+                                            ?>  
+                                <li>
+                                    <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
+                                </li><?php
+                             }
+                             ?>
+                              <li>
+                                <a href="createExam.php"> Create Exam</a>
+                              <li>
+                               
+                            </ul>
                         </li>
                         
                         <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                         </li>
                         
                        
@@ -113,11 +140,16 @@
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                     
-                            <a class="js-arrow" href="dashboard.php">
-                                <i class="fas fa-tachomter-alt"></i>Dashboard </a>
                         
-                                <li>
+                        <li >   
+                        <a class="js-arrow" href="dashboard.php">
+                               
+                               <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                           <ul class="list-unstyled navbar__sub-list js-sub-list">
+                             
+                           </ul>
+                        </li>
+                        <li>
                             <a href="table.php">
                                 <i class="fas fa-table"></i>Student list</a>
                         </li>
@@ -128,11 +160,32 @@
                
                         <li>
                             <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                                <i class="fas fa-calendar-alt"></i>Add  Questions</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <?php
+                                            $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
+                                            while ($row = mysqli_fetch_array($getdata)) {
+                                                # code...
+                                            
+                                            ?>  
+                                <li>
+                                    <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
+                                </li><?php
+                             }
+                             ?>
+                             <li>
+                                <a href="createExam.php"> Create Exam</a>
+                             <li>
+                               
+                            </ul>
                         </li>
                         <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                         </li>
                     </ul>
                 </div>
@@ -155,57 +208,84 @@
                             <h1 class="m-b-5">Students</h1>
                             <div class="col-md-12">
                                 <!-- DATA TABLE-->
-                                <input type="text" id="mySearch" onkeyup="searchFunction()" placeholder="Search for names.." title="Type in a name">
+                               
 
-
+                                <form method="post" action="">
+                                    <input type="text" name="search" placeholder="Search...">
+                                    <input type="submit" name="submit" value="Search">
+                                </form>
+                                
                                 <div class="table-responsive m-b-10">
-                                    <table id="myTable" class="table  table-bordered  table-data2">
-                                        <thead class="table-success">
-                                            <tr>
+                                <table id="myTable" class="table table-bordered table-data2">
+                                    <thead class="table-success">
+                                        <tr>
                                             <th>Student ID</th>
                                             <th>First name</th>
                                             <th>Last name</th>
                                             <th class="text-center">Section</th>
-                                            <th class="text-center ">Email</th>
+                                            <th class="text-center">Email</th>
                                             <th>Phone number</th>
                                             <th class="text-center">Address</th>
-                                            <th class="text-center">Age</th>
+                                     
                                             <th class="text-center">Gender</th>
                                             <th>Date of Birth</th>
                                             <th class="text-center">Edit</th>
                                             <th class="text-center">Delete</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                            <?php
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+
+                                        //search
+                                        if(isset($_POST['submit'])){
+                                            $search = $_POST['search'];
+                                            $sql = "SELECT * FROM student_info WHERE id LIKE '%$search%' OR fname LIKE '%$search%' OR lname LIKE '%$search%' OR email LIKE '%$search%'";
+                                            $result = $conn->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                                while($row = $result->fetch_assoc()) {
+                                                    echo "<tr>
+                                                            <td>" . $row["id"] . "</td>
+                                                            <td>" . $row["fname"] . "</td>
+                                                            <td>" . $row["lname"] . "</td>
+                                                            <td class='text-center'>" . $row["section"] . "</td>
+                                                            <td class='text-center'>" . $row["email"] . "</td>
+                                                            <td>" . $row["phn_n"] . "</td>
+                                                            <td class='text-center'>" . $row["addrss"] . "</td>
+                                                            
+                                                            <td class='text-center'>" . $row["gender"] . "</td>
+                                                            <td>" . $row["date_b"] . "</td>
+                                                            <td class='text-center'><a href='update.php?id=" . $row["id"] . "'>Edit</a></td>
+                                                            <td class='text-center'><a href='delete.php?id=" . $row["id"] . "'>Delete</a></td>
+                                                        </tr>";
+                                                }
+                                            } else {
+                                                echo "<tr><td colspan='12'>No results found</td></tr>";
+                                            }
+                                        } else {
+                                            // default display
                                             $getdata = mysqli_query($conn, "SELECT * FROM student_info");
                                             while ($row = mysqli_fetch_array($getdata)) {
-                                                # code...
-                                            
-                                            ?>
-                                            <tr>
-                                            <td> <?php echo $row['id'];?></td>
-                                            <td> <?php echo $row['fname'];?></td>
-                                            <td> <?php echo $row['lname'];?></td>
-                                            <td> <?php echo $row['section'];?></td>
-                                            <td> <?php echo $row['email'];?></td>
-                                            <td> <?php echo $row['phn_n'];?></td>
-                                            <td> <?php echo $row['addrss'];?></td>
-                                            <td> <?php echo $row['age'];?></td>
-                                            <td> <?php echo $row['gender'];?></td>
-                                            <td> <?php echo $row['date_b'];?></td>
-                                            <td> <a href="update.php?id=<?php echo $row['id'];?>"> Edit </a> </td>
-                                            <td> <a href="delete.php?id=<?php echo $row['id'];?>"> Delete </a> </td>
-                                            </tr>
+                                                echo "<tr>
+                                                        <td>" . $row["id"] . "</td>
+                                                        <td>" . $row["fname"] . "</td>
+                                                        <td>" . $row["lname"] . "</td>
+                                                        <td class='text-center'>" . $row["section"] . "</td>
+                                                        <td class='text-center'>" . $row["email"] . "</td>
+                                                        <td>" . $row["phn_n"] . "</td>
+                                                        <td class='text-center'>" . $row["addrss"] . "</td>
 
-                                                <?php
-                                                }
-                                                ?>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                   
+                                                        <td class='text-center'>" . $row["gender"] . "</td>
+                                                        <td>" . $row["date_b"] . "</td>
+                                                        <td class='text-center'><a href='update.php?id=" . $row["id"] . "'>Edit</a></td>
+                                                        <td class='text-center'><a href='delete.php?id=" . $row["id"] . "'>Delete</a></td>
+                                                    </tr>";
+                                            }
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                                                                
                                 </div>
                                 <!-- END DATA TABLE-->
                             </div>

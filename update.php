@@ -1,6 +1,10 @@
 <?php
     session_start();
     include "conn.php";
+    if(!isset($_SESSION['admin_id'])){
+        header("Location: home.php");
+        exit();
+    }
 
     $ref_id = $_GET['id'];
 
@@ -13,9 +17,10 @@
         $ln = $d -> lname;
         $sec = $d -> section;
         $eml = $d -> email;
+        $pas = $d -> sPassword;
         $phone = $d -> phn_n;
         $ads = $d -> addrss;
-        $agE = $d -> age;
+      
         $gen = $d -> gender;
         $dOb = $d -> date_b;
 
@@ -65,6 +70,7 @@
           <!-- MENU SIDEBAR-->
           <aside class="menu-sidebar d-none d-lg-block">
              <a class="logo" href="dashboard.php">
+             <img src="images/uiLogo3.jpeg"  style="height:65%;">
                 <h1>Admin</h1>
               </a>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -83,18 +89,38 @@
                             <a href="table.php">
                                 <i class="fas fa-table"></i>Student List</a>
                         </li>
-                        <li class="active has-sub">
+                        <li>
                             <a href="form.php">
                                 <i class="far fa-check-square"></i>Student Forms</a>
                         </li>
                     
                         <li>
                             <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                                <i class="fas fa-calendar-alt"></i>Add Questions</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <?php
+                                            $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
+                                            while ($row = mysqli_fetch_array($getdata)) {
+                                                # code...
+                                            
+                                            ?>  
+                                <li>
+                                    <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
+                                </li><?php
+                             }
+                             ?>
+                              <li>
+                                <a href="createExam.php"> Create Exam</a>
+                              <li> 
+                            </ul>
                         </li>
                         <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle""></i>Log out</a>
                         </li>
                         
                        
@@ -126,10 +152,16 @@
                 <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
                      
-                     <a class="js-arrow" href="dashboard.php">
-                         <i class="fas fa-tachomter-alt"></i>Dashboard </a>
+                 <li>   
+                        <a class="js-arrow" href="dashboard.php">
+                               
+                               <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                           <ul class="list-unstyled navbar__sub-list js-sub-list">
+                             
+                           </ul>
+                 </li>
                  
-                         <li>
+                 <li>
                      <a href="table.php">
                          <i class="fas fa-table"></i>Student list</a>
                  </li>
@@ -140,11 +172,31 @@
               
                  <li>
                             <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                                <i class="fas fa-calendar-alt"></i>Add Questions</a>
                  </li>
+                 <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <?php
+                                            $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
+                                            while ($row = mysqli_fetch_array($getdata)) {
+                                                # code...
+                                            
+                                            ?>  
+                                <li>
+                                    <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
+                                </li><?php
+                             }
+                             ?>
+                             <li>
+                                <a href="createExam.php"> Create Exam</a>
+                             <li> 
+                            </ul>
+                        </li>
                  <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                  </li>
                         
                         
@@ -175,7 +227,7 @@
                                             <div class="form-group has-success">
                                                 <label for="stud_id" class="control-label mb-1">Student's ID number</label>
                                                 <input id="stud_id" name="update_id" type="text" class="form-control stud_id valid" 
-                                                value="<?php echo $id;?>" 
+                                                value="<?php echo $id;?>"
                                                 data-val="true" data-val-required="Enter Student's Id number"
                                                     autocomplete="stud_id" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
                                                 <span class="help-block field-validation-valid" data-valmsg-for="stud_id" data-valmsg-replace="true"></span>
@@ -214,8 +266,28 @@
                                                 <input id="email" name="update_email" type="email" class="form-control email valid" data-val="true" data-val-required="Enter Student's Email "
                                                 value="<?php echo $eml;?>"  
                                                 autocomplete="email" aria-required="true" aria-invalid="false" aria-describedby="email-error">
-                                                <span class="help-block field-validation-valid" data-valmsg-for="email" data-valmsg-replace="true"></span>
+                                                <span class="help-block field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
                                             
+                                            </div>
+
+                                            <div class="form-group has-success">
+                                                <label for="password" class="control-label mb-1">Password</label>
+                                                <input id="update_password" name="update_password" type="password" class="form-control password valid" data-val="true" data-val-required="Enter Student's Password "
+                                                value="<?php echo $pas;?>"  
+                                                autocomplete="password" aria-required="true" aria-invalid="false" aria-describedby="password-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+                                               
+                                                <input type="checkbox" onclick="StudentUpdateShowPassword()">Show Password
+                                                <script>
+                                                    function StudentUpdateShowPassword() {
+                                                        var x = document.getElementById("update_password");
+                                                        if (x.type === "password") {
+                                                        x.type = "text";
+                                                        } else {
+                                                        x.type = "password";
+                                                        }
+                                                    }
+                                                </script>
                                             </div>
 
                                             <div class="form-group has-success">
@@ -235,14 +307,7 @@
                                             
                                             </div>
 
-                                            <div class="form-group has-success">
-                                                <label for="age" class="control-label mb-1">Age</label>
-                                                <input id="age" name="update_age" type="text" class="form-control age valid" data-val="true" data-val-required="Enter Student's Age "
-                                                value="<?php echo $agE;?>"      
-                                                autocomplete="age" aria-required="true" aria-invalid="false" aria-describedby="age-error">
-                                                <span class="help-block field-validation-valid" data-valmsg-for="age" data-valmsg-replace="true"></span>
-                                            
-                                            </div>
+                                         
 
                                             <div class="form-group has-success">
                                                 <label for="gender" class="control-label mb-1">Gender</label>
@@ -269,6 +334,7 @@
                                                     <span id="sub-button-add">Update data</span>
                                                  
                                                 </div>
+                                               
                                         </form>
                                     </div>
                                 </div>

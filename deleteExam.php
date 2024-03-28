@@ -4,7 +4,7 @@
      $ref_id = $_GET['id'];
 
     $delete = mysqli_query($conn, "DELETE FROM 
-    examcategory WHERE id ='$ref_id'");
+    examcatgory WHERE id ='$ref_id'");
   
     if($delete == true){
       
