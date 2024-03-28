@@ -1,21 +1,20 @@
-
 <?php
+
+
+ include ("conn.php");
+
+ session_start();   
+ if(!isset($_SESSION['admin_id'])){
+    header("Location: home.php");
+    exit();
+}
+
+
+
+
  
+?>                                          
 
-    include "conn.php";
- 
-    session_start();
-    $ref_id = $_GET['id'];
-
-    $getdata = mysqli_query($conn, "SELECT * FROM 
-    examcatgory WHERE id='$ref_id'");
-
-    while ($d=mysqli_fetch_object($getdata)){
-        $e = $d -> examName;
-        
-       
-    }
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +28,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Create & Edit Exam</title>
+    <title>Python</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -76,56 +75,51 @@
                 <div class="container-fluid">
                 <ul class="navbar-mobile__list list-unstyled">
                      
-                            <a class="js-arrow" href="dashboard.php">
-                                <i class="fas fa-tachomter-alt"></i>Dashboard </a>
-                        
-                                <li>
-                            <a href="table.php">
-                                <i class="fas fa-table"></i>Student list</a>
-                        </li>
-                        <li>
-                            <a href="form.php">
-                                <i class="far fa-check-square"></i>Student Forms</a>
-                        </li>
-                        
-                        <li>
+                     <a class="js-arrow" href="dashboard.php">
+                         <i class="fas fa-tachomter-alt"></i>Dashboard </a>
+                 
+                         <li>
+                     <a href="table.php">
+                         <i class="fas fa-table"></i>Student list</a>
+                 </li>
+                 <li>
+                     <a href="form.php">
+                         <i class="far fa-check-square"></i>Student Forms</a>
+                 </li>
+               
+                
+                 <li>
                             <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add Questions</a>
-                        </li>
-                        <li class="has-sub">
+                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
+                 </li>
+                 <li class="has-sub">
                             <a class="js-arrow" href="#">
-                          
-                            <i class="fas fa-copy"></i>Exams</a>
+                                <i class="fas fa-copy"></i>Exams</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                            <?php
-                                            $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
-                                            while ($row = mysqli_fetch_array($getdata)) {
-                                                # code...
-                                            
-                                            ?>  
                                 <li>
-                                    <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
+                                    <a href="exam1.php">JAVA</a>
                                 </li>
-                                <?php
-                             }
-                             ?>
-                             <li>
-                                <a href="create_exam.php"> Create Exam</a>
                                 <li>
-                               
+                                    <a href="exam2.php">C++</a>
+                                </li>
+                                <li class="active has-sub">
+                                    <a href="exam3.php">Python</a>
+                                </li>
+                                <li>
+                                    <a href="exam4.php">HTML</a>
+                                </li>
                             </ul>
-                          
                         </li>
-                        
-                        <li>
+                 <li>
                             <a href="logout.php">
-                                <i class="fas fa-user-circle"></i>Log out</a>
-                        </li>
+                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                 </li>
                         
-                    </ul>
-
-                      
                         
+                
+              
+               
+             </ul>
         </header>
         <!-- END HEADER MOBILE-->
 
@@ -136,7 +130,7 @@
               </a>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
-                <ul class="list-unstyled navbar__list">
+                    <ul class="list-unstyled navbar__list">
                         <li>
                             <a class="js-arrow" href="dashboard.php">
                                
@@ -148,46 +142,43 @@
                        
                         <li>
                             <a href="table.php">
-                                <i class="fas fa-table"></i>Student list</a>
+                                <i class="fas fa-table"></i>Student List</a>
                         </li>
                         <li>
                             <a href="form.php">
                                 <i class="far fa-check-square"></i>Student Forms</a>
                         </li>
-                        
-                   
+                       
                         <li>
                             <a href="questionCreate.php">
-                                <i class="fas fa-calendar-alt"></i>Add Questions</a>
+                                <i class="fas fa-calendar-alt"></i>Add & Edit Questions</a>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
                                 <i class="fas fa-copy"></i>Exams</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <?php
-                                                $getdata = mysqli_query($conn, "SELECT * FROM examcatgory");
-                                                while ($row = mysqli_fetch_array($getdata)) {
-                                                    # code...
-                                                
-                                                ?>  
-                                    <li>
-                                        <a href="exam1.php?id=<?php echo $row['examName'];?>"><?php echo $row['examName'];?></a>
-                                    </li>
-                                    <?php
-                                }
-                                ?>
-                              <li>
-                                <a href="createExam.php"> Create Exam</a>
                                 <li>
-                               
+                                    <a href="exam1.php">JAVA</a>
+                                </li>
+                                <li>
+                                    <a href="exam2.php">C++</a>
+                                </li>
+                                <li class="active has-sub">
+                                    <a href="exam3.php">Python</a>
+                                </li>
+                                <li>
+                                    <a href="exam4.php">HTML</a>
+                                </li>
                             </ul>
                         </li>
-                        <li>
+                          <li>
                             <a href="logout.php">
-                                <i class="fas fa-user-circle"></i>Log out</a>
+                                <i class="fas fa-calendar-alt"></i>Log out</a>
                         </li>
-                      
                         
+                       
+                       
+                    </ul>
                 </nav>
             </div>
         </aside>
@@ -195,68 +186,93 @@
 
         <!-- PAGE CONTAINER-->
         <div class="page-container">
-           
+   
 
                 <!-- MAIN CONTENT-->
                 <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="card-header"></div>
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <h3 class="text-center title-2">Create  Exam</h3>
-                                        </div>
-                                        <hr>
-                                        <form action="examCreateProc.php?id=<?php echo $ref_id;?>" method="post" novalidate="novalidate">
-                                             
-                                             <div class="form-group has-success">
-                                                 <label for="exam_name" class="control-label mb-1">Exam Category</label>
-                                                 <input id="exam_nameEdit" name="exam_nameEdit" type="text" class="form-control exam_name valid" data-val="true" data-val-required="Enter Exam Name"
-                                                 value = "<?php echo $e;?>"
-                                                 autocomplete="exam_name" aria-required="true" aria-invalid="false" aria-describedby="exam_nameEdit-error">
-                                                 <span class="help-block field-validation-valid" data-valmsg-for="exam_name" data-valmsg-replace="true"></span>
-                                             
-                                             </div>
-                                                    
-                                                <div>
-                                                 <input id="submit_button" type="submit" name= "edit_Exam" class="btn btn-lg btn-info btn-block" value="Save">
-                                                    &nbsp;
-                                                    
-                                                 
-                                                </div>
-                                        </form>        
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="row justify-content-center">    
+                            
+                                    
                           
-              
-                          
-                        </div>          
-                      
-                          
-                             
                        
+                            
+                            <div class="col-lg-10">
+                                <div class="table-responsive m-b-40">
+                           
+                                    <h1>Python questions</h1>
+                                    <table id="myTable" class="table  table-bordered  table-data2">
+                                        <thead class="table-success">
+                                            
+                                            <tr>
+                                            <th>Category</th>
+                                            <th>Question</th>
+                                            <th>Option 1</th>
+                                            <th class="text-center">Option 2</th>
+                                            <th class="text-center ">Option 3</th>
+                                            <th>Option 4</th>
+                                            <th class="text-center">Answer</th>
+                                            
+                                        
+                                            <th class="text-center">Edit</th>
+                                            <th class="text-center">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                            <?php
+                                            
+                              
+                                           
+                                            $getdataz = mysqli_query($conn, "SELECT * FROM questions WHERE category ='Python'");
+                                            while ($row = mysqli_fetch_array($getdataz)) {
+                                                # ciode...
+                                           
+                                            ?>
+                                            <tr>
+                                            <td> <?php echo $row['category'];?></td>
+                                            <td> <?php echo $row['question'];?></td>
+                                            <td> <?php echo $row['q_op1'];?></td>
+                                            <td> <?php echo $row['q_op2'];?></td>
+                                            <td> <?php echo $row['q_op3'];?></td>
+                                            <td> <?php echo $row['q_op4'];?></td>
+                                            <td> <?php echo $row['correct_option'];?></td>
+                                           
+                                       
+                                            <td> <a href="editquestion.php?id=<?php echo $row['id'];?>"> Edit </a> </td>
+                                            <td> <a href="questionDelete.php?id=<?php echo $row['id'];?>"> Delete </a> </td>
+                                            </tr>
 
-
+                                                <?php
+                                                }
+                                                ?>
+                                          
+                                                </tr>  
+                                        </tbody>
+                                    </table>
+                                   
+                                </div>
+                            </div>   
+                    
                     </div>
                 </div>
             </div>
+            <div class="row justify-content-md-center">
 
-                 <div class="row row justify-content-md-center">
-                            <div class="col-md-12">
+
+
+                            <div class="col-md-10">
                                 <div class="copyright">
                                     <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
                                 </div>
-                 </div>
-             </div>
+                            </div>
+          </div>
 
         </div>
 
     </div>
-
+ 
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
@@ -285,4 +301,4 @@
 
 </html>
 <!-- end document-->
-
+                                            

@@ -5,6 +5,10 @@
         header("Location: home.php");
         exit();
     }
+    if(!isset($_SESSION['admin_id'])){
+        header("Location: home.php");
+        exit();
+    }
 
     $ref_id = $_GET['id'];
 
@@ -227,6 +231,7 @@
                                             <div class="form-group has-success">
                                                 <label for="stud_id" class="control-label mb-1">Student's ID number</label>
                                                 <input id="stud_id" name="update_id" type="text" class="form-control stud_id valid" 
+                                                value="<?php echo $id;?>"
                                                 value="<?php echo $id;?>"
                                                 data-val="true" data-val-required="Enter Student's Id number"
                                                     autocomplete="stud_id" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">

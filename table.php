@@ -104,6 +104,24 @@
                                
                             </ul>
                         </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="exam1.php">JAVA</a>
+                                </li>
+                                <li>
+                                    <a href="exam2.php">C++</a>
+                                </li>
+                                <li>
+                                    <a href="exam3.php">Python</a>
+                                </li>
+                                <li>
+                                    <a href="exam4.php">HTML</a>
+                                </li>
+                            </ul>
+                        </li>
                         
                         <li>
                             <a href="logout.php">
@@ -181,6 +199,24 @@
                                 <a href="createExam.php"> Create Exam</a>
                              <li>
                                
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Exams</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="exam1.php">JAVA</a>
+                                </li>
+                                <li>
+                                    <a href="exam2.php">C++</a>
+                                </li>
+                                <li>
+                                    <a href="exam3.php">Python</a>
+                                </li>
+                                <li>
+                                    <a href="exam4.php">HTML</a>
+                                </li>
                             </ul>
                         </li>
                         <li>

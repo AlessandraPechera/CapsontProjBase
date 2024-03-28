@@ -3,7 +3,12 @@
 
 
  
+ 
  session_start();   
+ if(!isset($_SESSION['admin_id'])){
+    header("Location: home.php");
+    exit();
+}
  if(!isset($_SESSION['admin_id'])){
     header("Location: home.php");
     exit();
@@ -22,6 +27,7 @@
         $q2 = $d -> q_op2;
         $q3 = $d -> q_op3;
         $q4 = $d -> q_op4;
+        $ans = $d -> correct_option;
         $ans = $d -> correct_option;
         $cate = $d -> category;
     
@@ -239,12 +245,14 @@
                                             <label for="question" class="col-sm-2 col-form-label">Question</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="editQ" id="editQ" value="<?php echo $q;?>">
+                                                <input type="text" class="form-control" name="editQ" id="editQ" value="<?php echo $q;?>">
                                             </div>
                                         </div>     
                                         
                                         <div class="form-group row">
                                             <label for="opt1" class="col-sm-2 col-form-label">Add Option 1</label>
                                             <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="editQ1" id="editQ1" value="<?php echo $q1;?>">
                                                 <input type="text" class="form-control" name="editQ1" id="editQ1" value="<?php echo $q1;?>">
                                             </div>
                                         </div>     
@@ -254,12 +262,14 @@
                                             <label for="opt2" class="col-sm-2 col-form-label">Add Option 2</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="editQ2" id="editQ2" value="<?php echo $q2;?>">
+                                                <input type="text" class="form-control" name="editQ2" id="editQ2" value="<?php echo $q2;?>">
                                             </div>
                                         </div>           
 
                                         <div class="form-group row">
                                             <label for="opt3" class="col-sm-2 col-form-label">Add Option 3</label>
                                             <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="editQ3" id="editQ3" value="<?php echo $q3;?>">
                                                 <input type="text" class="form-control" name="editQ3" id="editQ3" value="<?php echo $q3;?>">
                                             </div>
                                         </div>           
@@ -268,6 +278,7 @@
                                             <label for="opt4" class="col-sm-2 col-form-label">Add Option 4</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="editQ4" id="editQ4" value="<?php echo $q4;?>">
+                                                <input type="text" class="form-control" name="editQ4" id="editQ4" value="<?php echo $q4;?>">
                                             </div>
                                         </div>               
                                         
@@ -275,8 +286,10 @@
                                             <label for="qAnswerE" class="col-sm-2 col-form-label">Add Answer</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="editAns" id="editAns" value="<?php echo $ans;?>">
+                                                <input type="text" class="form-control" name="editAns" id="editAns" value="<?php echo $ans;?>">
                                             </div>
                                         </div>      
+                                        <input type ="hidden" name="categ" value="<?php echo $cate;?>">
                                         <input type ="hidden" name="categ" value="<?php echo $cate;?>">
 
                                         

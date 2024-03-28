@@ -6,6 +6,10 @@ if(!isset($_SESSION['admin_id'])){
     header("Location: home.php");
     exit();
 }
+if(!isset($_SESSION['admin_id'])){
+    header("Location: home.php");
+    exit();
+}
 ?>
 
 
@@ -76,6 +80,7 @@ if(!isset($_SESSION['admin_id'])){
                             <a href="form.php">
                                 <i class="far fa-check-square"></i>Student Forms</a>
                         </li>
+                        
                         
                    
                         <li>

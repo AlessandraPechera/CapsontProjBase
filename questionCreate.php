@@ -8,6 +8,10 @@
     header("Location: home.php");
     exit();
 }
+ if(!isset($_SESSION['admin_id'])){
+    header("Location: home.php");
+    exit();
+}
 
 
 
@@ -207,6 +211,8 @@
                         <div class="row justify-content-center">    
                             
                                     
+                            
+                                    
                           
                             <div class="col-lg-10">
                                 <div class="card">
@@ -240,6 +246,8 @@
                                         ?>
                                       
                                          </select>
+                                            </div>
+                                        </div>   
                                             </div>
                                         </div>   
 
@@ -334,6 +342,9 @@
 
             </div>
             <div class="row justify-content-md-center">
+
+
+
 
 
 
