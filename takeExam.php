@@ -1,13 +1,37 @@
 <?php
 include ("conn.php");
 
+
 session_start();
 
 if(!isset($_SESSION['student_id'])){
     header("Location: home.php");
     exit();
 }
+$ref_id = $_GET['id'];
+$student_active = $_SESSION['student_id'];
+$specific_data = $ref_id; // Specify the specific data to check for
+
+$sql = "SELECT * FROM student_scores WHERE student_id = '$student_active' AND eCategory = '$specific_data'";
+$result = $conn->query($sql);
+$count = mysqli_num_rows($result);
+
+if ($count > 0) {
+    echo '<script>alert("You have already taken the exam!"); window.location.href ="exams.php";</script>';
+} else {
+   
+}
+
+
+
+  
+
 ?>
+
+
+
+
+
 
 
 
@@ -20,7 +44,7 @@ if(!isset($_SESSION['student_id'])){
    
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Exams</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -58,7 +82,7 @@ if(!isset($_SESSION['student_id'])){
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li>
+                        <li >
                             <a class="js-arrow" href="studentDash.php?id=<?php echo $_SESSION['student_id'];?>">
                                
                             <i class="fas fa-tachometer-alt"></i>Dashboard</a>
@@ -66,17 +90,22 @@ if(!isset($_SESSION['student_id'])){
                               
                             </ul>
                         </li>
-                       
-                     
-                        <li class="active has-sub">
-                            <a href="takeExam.php?id=<?php echo $_SESSION['student_id'];?>">
+                
+                        <li>
+                    
+                        
+                         
+                            <a href="exams.php?id=<?php echo $_SESSION['student_id'];?>">
                                 <i class="far fa-check-square"></i>Exams </a>
+                        
+                        
                         </li>
-                   
+                       
+                       
                        
                         <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                         </li>
                       
                         
@@ -107,20 +136,20 @@ if(!isset($_SESSION['student_id'])){
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                      
-                            <a class="js-arrow" href="studentDash.php">
+                            <a class="js-arrow" href="studentDash.php?id=<?php echo $_SESSION['student_id'];?>">
                                 <i class="fas fa-tachomter-alt"></i>Dashboard </a>
                         
                                 <li>
                             
                         <li>
-                            <a href="takeExam.php">
+                            <a href="exams.php?id=<?php echo $_SESSION['student_id'];?>">
                                 <i class="far fa-check-square"></i>Exams</a>
                         </li>
                         
                        
                         <li>
                             <a href="logout.php">
-                                <i class="fas fa-calendar-alt"></i>Log out</a>
+                                <i class="fas fa-user-circle"></i>Log out</a>
                         </li>
                         
                     </ul>
@@ -139,92 +168,74 @@ if(!isset($_SESSION['student_id'])){
        
 
         <!-- PAGE CONTAINER-->
-        <div class="page-container">
-
-
-<!-- MAIN CONTENT-->
+<div class="page-container">
 <div class="main-content">
 <div class="section__content section__content--p30">
     <div class="container-fluid">
         <div class="row justify-content-md-center">
             <div class="col-lg-8">
                 <div class="card">
-                    <div class="card-header">Exam Form</div>
+                    <div class="card-header text-center title-2">Exam</div>
                     <div class="card-body">
-                        <div class="card-title">
-                            <h3 class="text-center title-2"> Exam</h3>
-                        </div>
-                        <hr>
-                         
-                <?php
+                 
+                       
+               
+    <?php
+  $ref_id = $_GET['id'];
+  
+  $sql = "SELECT * FROM `questions` WHERE category ='$ref_id'  ORDER BY RAND() LIMIT 10";
+  $result = $conn->query($sql);
 
-                $count = 1;
-                $getdata = mysqli_query($conn, "SELECT * FROM questions WHERE category='JAVA' ORDER BY RAND();");
-              $row = mysqli_fetch_array($getdata);
-            
-                    
+  if ($result->num_rows > 0) {
+      $questions = [];
+      while ($row = $result->fetch_assoc()) {
+          $questions[] = $row;
+      }
 
-                        
-                                        
-                ?>
-                
-                
-                <form action="examsendProcess.php" method ="post" class="was-validated">
-                    
-                    <input type="hidden" name="sId" value="<?php echo  $_SESSION['student_id']; ?>">
+      // Display the questions in an examination format
+      ?>
+      <form action="submitExam.php" method="POST" class="was-validated">
+          <?php
+          foreach ($questions as $index => $question) {
+              echo "<h4>Question " . ($index + 1) . ":</h4>";
+              echo "<input type='hidden' name='question_id[]' value='" . $question['id'] . "'>";
+              echo "<p>" . $question['question'] . "</p>";
+              echo "<ul>";
+              echo "<input type='radio' name='answer[" . $question['id'] . "]' value='[" . $question['q_op1'] . "]'> " . $question['q_op1'] . "</li>";
+              echo "<br><input type='radio' name='answer[" . $question['id'] . "]' value='[" . $question['q_op2'] . "]'> " . $question['q_op2'] . "</li>";
+              echo "<br><input type='radio' name='answer[" . $question['id'] . "]' value='[" . $question['q_op3'] . "]'> " . $question['q_op3'] . "</li>";
+              echo "<br><input type='radio' name='answer[" . $question['id'] . "]' value='[" . $question['q_op4'] . "]'> " . $question['q_op4'] . "</li>";
+              echo "</ul>";
+          }
+          ?>
+          <div>
+              <br><input id="submit_button" type="submit" value="Submit" class="btn btn-lg btn-info btn-block" value="Submit">
+              &nbsp;
+          </div>
+      </form>
+      <?php
+  } else {
+      echo "No questions found.";
+  }
 
-                    <input type="hidden" name="fname" value="<?php echo  $_SESSION['student_name']; ?>">
+?>
 
-                    
-           
-
-                    <input type="hidden" name="sSection" value="<?php echo  $_SESSION['student_id']; ?>">
-
-                    <?php echo $count++;?>. <label for="question"><?php echo $row['question'];?></label>
-                    <input type="hidden" name="questionn" value="<?php echo $row['question'];?>" ><br>
-
-                    <input type="radio" id="qop1" name="qop" value="<?php echo $row['q_op1']?>">
-
-                    <input type="hidden" name="qop1" value="<?php echo $row['q_op1'];?>" >
-                    <label for="qop1"><?php echo $row['q_op1']?></label><br>
-                    
-                
-                    <input type="radio" id="qop2" name="qop" value="<?php echo $row['q_op2']?>">
-                    <input type="hidden" name="qop2" value="<?php echo $row['q_op2'];?>" >
-                    <label for="qop2"><?php echo $row['q_op2']?></label><br>
-                    
-                    <input type="radio" id="qop3" name="qop" value="<?php echo $row['q_op3']?>">
-                    <input type="hidden" name="qop3" value="<?php echo $row['q_op3'];?>" >
-                    <label for="qop3"><?php echo $row['q_op3']?></label><br>
-                    
-                    
-                    
-                    <input type="radio" id="qop4" name="qop" value="<?php echo $row['q_op4']?>">
-                    <input type="hidden" name="qop4" value="<?php echo $row['q_op4'];?>" >
-                    <label for="qop4"><?php echo $row['q_op4']?></label><br>
-
-                    <input type="hidden" name="canser" value="<?php echo $row['answer'];?>" >
-                
-
-                
-                    
-                    
-                
-                    <?php
-                    
-                    ?>
-                    
-                   
-                        <div>
-                        <input id="submit_button" type="submit" name= "submitExamSent" class="btn btn-lg btn-info btn-block" value="submit">
-                                &nbsp;
-                                    <span id="sub-button-add">Submit</span>
-                                                    
-                        </div>
-                </form>
-                    </div>
+                                    </div>
                 </div>
             </div>
+            
+
+    </div>
+</div>
+</div>
+
+</div>
+<!-- MAIN CONTENT-->
+<div class="main-content">
+<div class="section__content section__content--p30">
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
+       
             
 
     </div>

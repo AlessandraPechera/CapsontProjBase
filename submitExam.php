@@ -17,34 +17,40 @@ if (!isset($_SESSION['student_id'])) {
 
     $score = 0;
     
+   
     foreach ($question_ids as $question_id) {
         if (array_key_exists($question_id, $answers)) {
-
+    
             $selected_option = $answers[$question_id];
             $getQuestion =  "SELECT * FROM `questions` WHERE id = $question_id";
             $qname = $conn->query($getQuestion);
-
+    
             $sql = "SELECT * FROM `questions` WHERE id = $question_id";
             $result = $conn->query($sql);
           
             if ($result->num_rows > 0) {
-
+    
                 $rowData = $qname->fetch_assoc();
                 $row = $result->fetch_assoc();
               
                 $questionName = $rowData['question'];
                 $correct_option = $row['correct_option'];
                 
-
-                // Debug: Output question Name, correct option, and selected option for each question
-                echo "<br>  Question: $questionName<br><br>Correct Option: $correct_option <br> Selected Option: $selected_option <br>";
+                // Determine if the answer is correct or incorrect
+                $is_correct = (trim($selected_option, '[]') == $correct_option);
+                $symbol = $is_correct ? '&#10004;' : '&#10008;'; // Checkmark or 'x' symbol
                 
-                if (substr($selected_option, 1, -1) == $correct_option) {
-                $score++;
+                // Debug: Output question Name, correct option, and selected option for each question
+                echo "<br>  Question: $questionName $symbol<br><br>Correct Option: $correct_option <br> Selected Option: " . trim($selected_option, '[]') . "<br>";
+                
+                if ($is_correct) {
+                    $score++;
                 }
             }
         }
     }
+    
+    
 
       // Output final score
     echo "<br> Final Score: $score";

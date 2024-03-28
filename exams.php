@@ -8,7 +8,22 @@ if(!isset($_SESSION['student_id'])){
     header("Location: home.php");
     exit();
 }
+/*
+$stud_id = $_SESSION['student_id'];
 
+$sql = "SELECT * FROM student_scores WHERE student_id = '$stud_id'";
+  $result = $conn->query($sql);
+  $row = $result->fetch_assoc();
+  $check = $row['student_id'];
+  $check1 =$row['eCategory'];
+  
+if($check = 1 && $check1 = 1){
+ echo "you already took this exam ";
+ header("Location:takeExam.php");
+}else if($check = 0 && $check1 = 0){
+    header("Location:studentDash.php");
+}
+*/
 ?>
 
 
@@ -26,7 +41,7 @@ if(!isset($_SESSION['student_id'])){
    
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Exams</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -64,7 +79,7 @@ if(!isset($_SESSION['student_id'])){
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li  class="active has-sub">
+                        <li>
                             <a class="js-arrow" href="studentDash.php?id=<?php echo $_SESSION['student_id'];?>">
                                
                             <i class="fas fa-tachometer-alt"></i>Dashboard</a>
@@ -73,11 +88,11 @@ if(!isset($_SESSION['student_id'])){
                             </ul>
                         </li>
                 
-                        <li>
+                        <li  class="active has-sub">
                     
                         
                          
-                            <a href="exams.php?id=<?php echo $_SESSION['student_id'];?>">
+                            <a href="takeExam.php?id=<?php echo $_SESSION['student_id'];?>">
                                 <i class="far fa-check-square"></i>Exams </a>
                         
                         
@@ -117,11 +132,10 @@ if(!isset($_SESSION['student_id'])){
             <nav class="navbar-mobile">
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
-                     <li >
+                    <li >
                             <a class="fas fa-tachometer-alt"class="js-arrow" href="studentDash.php?id=<?php echo $_SESSION['student_id'];?>">
                                 <i class="fas fa-tachomter-alt"></i>Dashboard </a>
                     </li>  
-                               
                             
                         <li>
                             <a href="exams.php?id=<?php echo $_SESSION['student_id'];?>">
@@ -156,15 +170,53 @@ if(!isset($_SESSION['student_id'])){
     <div class="container-fluid">
         <div class="row justify-content-md-center">
         <div class="col-lg-8">
-                              
+                                <div class="card">
+                                    <div class="card-header"></div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h3 class="text-center title-2">Exams</h3>
+                                        </div>
+                                        <hr>
+                                        <table class="table table-success">
+                                            <thead>
+                                                <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Exam Name</th>
+                                                <th scope="col">Select</th>
+                                     
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                <?php
+                                                $getdata = mysqli_query($conn, "SELECT examcatgory.id, examcatgory.examName
+                                                FROM examcatgory
+                                                LEFT JOIN questions ON examcatgory.id = questions.id");
+                                                while ($row = mysqli_fetch_array($getdata)) {
+                                                # code...
+                                            
+                                                ?>
+                                                <tr>
+                                                <td><?php echo $row['id'];?></td>
+                                                <td> <?php echo $row['examName'];?></td>
+                                                
+                                                <td><a href="takeExam.php?id=<?php echo $row['examName'];?>"> SELECT</a></td>
+                                          
+                                                </tr>
+                                                
+                                                <?php
+                                                }
+                                                ?>
+                                                </tr>   
+                                            </tbody>
+                                            </table>
+                                    </div>
+                                </div>
                             </div>
 
     </div>
 </div>
 </div>
-
-
-
 
 
 <!-- MAIN CONTENT-->
